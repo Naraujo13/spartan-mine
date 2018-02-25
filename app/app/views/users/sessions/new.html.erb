@@ -16,13 +16,13 @@
     end %>
 <div class="row" style="padding:60px 20px 0px 20px">
     <div class='col s6 hide-on-med-and-down' id="image" style="text-align:center"  >
-        <img style="width:100%;height:auto" src="/assets/system/locked.png" >
-        <h3><%=t"user_ssession_title"%></h3>
-        <p style="text-align: center"><%= t 'title_short'%> <%=t"user_ssession_descrip"%></p>
+        <img style="width:100%;height:auto" src="/assets/system/museu_login.jpg" >
+        <h3>Gerenciamento</h3>
+        <p style="text-align: center">Spartan é um sistema para manter a informação atualizada</p>
     </div>
     <div class='col s12 m12 l6' >
         <div class='z-depth-5 cardLogin' >
-            <h3>Entrar no Domum</h3>
+            <h3>Entrar no Spartan</h3>
             <div class="row" style="margin-bottom: 0px;">
                 <%=paper_input "Email", f,"email",@user.email,"email"%>
                 <%=paper_input t("user_ssession_password"), f,"password",@user.password,"lock_outline",false,"password"%>
