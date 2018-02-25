@@ -7,7 +7,7 @@
 
 					<% @mediafiles.each do |mediafile| %>
 
-						<%=list_item mediafile.id, mediafile.references, mediafile.updated_at, edit_mediafile_path(mediafile),"chat",true%>
+						<%=list_item mediafile.id, mediafile.id, mediafile.item_id, edit_mediafile_path(mediafile),"chat",true%>
 
 					<% end %>
 

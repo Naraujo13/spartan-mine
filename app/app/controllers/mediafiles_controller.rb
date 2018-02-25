@@ -7,7 +7,7 @@ class MediafilesController < ApplicationController
 
   # GET /mediafiles
   def index
-    @mediafiles = Mediafiles.search(params[:search]).page(params[:page])
+    @mediafiles = Mediafile.search(params[:search]).page(params[:page])
     @total = Mediafile.all.length
   end
 
@@ -46,8 +46,9 @@ class MediafilesController < ApplicationController
 
   # DELETE /mediafiles/1
   def destroy
+    @mediafiles = Mediafile.find(params[:id])
     @mediafile.destroy
-    redirect_to mediafiles_url, notice: 'Mediafile was successfully destroyed.'
+    redirect_to(:back)
   end
 
   private

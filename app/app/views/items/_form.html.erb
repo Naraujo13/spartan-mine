@@ -35,7 +35,7 @@
 
             <% types = 'jpg jpeg png svg pdf mp3 wav flac mp4 avi mkv rmvb ogg' %>
 
-            <%= f.fields_for :mediafiles do |p| %>
+            <%= f.fields_for :new_mediafiles do |p| %>
                   <div class="field">
                         <%= paper_upload_file "Mídias", p, :file, "cloud_download", true,  "mediafiles[file][]" %> 
                   </div>
@@ -44,6 +44,7 @@
                     
             <% @attached_mediafiles.each do |mf| %>
                   <%= paper_download_file mf.file_identifier, mf.file_url %>
+                  <%= button_to "Delete", {:action => 'destroy', :id => mf.id}, :confirm => "Are you sure you want to delete?", :method => :delete, :controller => "mediafiles" %>
             <% end %>
 
       <% end %>

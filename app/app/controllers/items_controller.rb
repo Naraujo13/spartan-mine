@@ -75,8 +75,13 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   def destroy
-    @item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    if params[:controller] == "mediafiles"
+      mediafile = Mediafile.find[params[:id]]
+      mediafile.destroy
+    else
+      @item.destroy
+      redirect_to items_url, notice: 'Item was successfully destroyed.'
+    end
   end
 
   private
