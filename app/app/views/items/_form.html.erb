@@ -32,6 +32,20 @@
 
             <%=paper_input "Descrição", f,"description", @item.description %>
 
+
+            <% types = 'jpg jpeg png svg pdf mp3 wav flac mp4 avi mkv rmvb ogg' %>
+
+            <%= f.fields_for :mediafiles do |p| %>
+                  <div class="field">
+                        <%= paper_upload_file "Mídias", p, :file, "cloud_download", true,  "mediafiles[file][]" %> 
+                  </div>
+            <% end %>
+            
+                    
+            <% @attached_mediafiles.each do |mf| %>
+                  <%= paper_download_file mf.file_identifier, mf.file_url %>
+            <% end %>
+
       <% end %>
 
 <%=app_footer_page @item,items_path%>

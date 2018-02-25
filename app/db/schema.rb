@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "collections", ["museum_id"], name: "fk_rails_6f0086dec2", using: :btree
+  add_index "collections", ["museum_id"], name: "fk_rails_2dbbe50680", using: :btree
 
   create_table "example_categories", force: :cascade do |t|
     t.text     "description", limit: 65535
@@ -82,19 +82,16 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "items", ["collection_id"], name: "fk_rails_0d2eabbfa2", using: :btree
+  add_index "items", ["collection_id"], name: "fk_rails_40cb98e800", using: :btree
 
   create_table "mediafiles", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
     t.integer  "item_id",    limit: 4
-    t.string   "name",       limit: 255
     t.string   "file",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "mediafiles", ["item_id"], name: "fk_rails_e993c3a1b0", using: :btree
-  add_index "mediafiles", ["user_id"], name: "fk_rails_4d4ff5b888", using: :btree
+  add_index "mediafiles", ["item_id"], name: "fk_rails_c961be70ef", using: :btree
 
   create_table "museums", force: :cascade do |t|
     t.string   "cod_museum",    limit: 255
@@ -109,8 +106,8 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "museums", ["director_id"], name: "fk_rails_9e5396f0fd", using: :btree
-  add_index "museums", ["technician_id"], name: "fk_rails_331fe4d5ae", using: :btree
+  add_index "museums", ["director_id"], name: "fk_rails_c30d3c5dd6", using: :btree
+  add_index "museums", ["technician_id"], name: "fk_rails_26b82163ee", using: :btree
 
   create_table "system_access_to_nested_resources", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -321,7 +318,6 @@ ActiveRecord::Schema.define(version: 20180225021839) do
   add_foreign_key "collections", "museums", on_update: :cascade, on_delete: :cascade
   add_foreign_key "items", "collections", on_update: :cascade, on_delete: :cascade
   add_foreign_key "mediafiles", "items", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "mediafiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "museums", "users", column: "director_id", on_update: :cascade
   add_foreign_key "museums", "users", column: "technician_id", on_update: :cascade
 end

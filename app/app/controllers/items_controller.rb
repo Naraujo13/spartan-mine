@@ -17,11 +17,20 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
+    
     @item = Item.new
+    
+    @mediafile = @item.mediafiles.build
+    @attached_mediafiles = []
+
   end
 
   # GET /items/1/edit
   def edit
+
+    @mediafile = @item.mediafiles.build
+    @attached_mediafiles = Mediafile.where(item_id: @item.id).all
+
   end
 
   # POST /items
@@ -30,22 +39,38 @@ class ItemsController < ApplicationController
 
     @item.collection_id = params[:item]["collection_id"]
 
-    if @item.save
-      redirect_to items_path, notice: 'Item was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      if @item.save
+        params[:mediafiles]['file'].each do |f|
+           @mediafile = @item.mediafiles.create!(:file => f)
+        end
+        format.html { redirect_to items_path, notice: 'Item was successfully created.' }
+      else
+        format.html { render action: 'new' }
+      end
     end
+
   end
 
   # PATCH/PUT /items/1
   def update
-    if @item.update(item_params)
-      @item.collection_id = params[:item]["collection_id"]
-      @item.save
-      redirect_to items_path, notice: 'Item was successfully updated.'
-    else
-      render :edit
+
+    respond_to do |format|
+      if @item.update(item_params)
+        
+        @item.collection_id = params[:item]["collection_id"]
+        @item.save
+
+        params[:mediafiles]['file'].each do |f|
+           @mediafile = @item.mediafiles.create!(:file => f)
+        end
+        
+        format.html { redirect_to items_path, notice: 'Item was successfully updated.' }
+      else
+        format.html { render action: 'edit' }
+      end
     end
+
   end
 
   # DELETE /items/1
@@ -62,6 +87,6 @@ class ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:item_id, :name, :references, :year, :status, :lenght, :height, :width, :thickness, :aquisition_date, :outer_circumference, :inner_circumference, :weight, :conservation_state, :biography, :description)
+      params.require(:item).permit(:item_id, :name, :references, :year, :status, :lenght, :height, :width, :thickness, :aquisition_date, :outer_circumference, :inner_circumference, :weight, :conservation_state, :biography, :description, {mediafiles: []})
     end
 end
