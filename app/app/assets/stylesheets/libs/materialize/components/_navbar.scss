@@ -15,7 +15,7 @@ nav {
 
   color: $navbar-font-color;
   @extend .z-depth-1;
-  background-color: $primary-color;
+  background-color: #009688;
   width: 100%;
   height: $navbar-height-mobile;
   line-height: $navbar-line-height-mobile;
@@ -206,4 +206,12 @@ nav {
   .navbar-fixed {
     height: $navbar-height;
   }
+}
+
+.SpartanName {
+  color: #FFFF;
+  display: inline-block;
+  margin: 0 auto;
+  padding-top: 2%;
+  overflow: hidden;
 }
