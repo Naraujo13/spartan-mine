@@ -1,0 +1,11 @@
+<%= @page_index = params[:tab]%>
+
+$('#collection_<%=params[:tab]%>').html('')
+
+  <% @mediafiles.each do | mediafile | %>
+
+     $('#collection_<%=params[:tab]%>').append(`<%=list_item mediafile.id, mediafile.references,mediafile.updated_at, edit_mediafile_path(mediafile),"chat",true%>`);
+
+     <% end %>
+
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@mediafiles, :remote => true).to_s) %>');

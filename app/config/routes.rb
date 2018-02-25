@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :mediafiles
+
   resources :items
 
   resources :collections

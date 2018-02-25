@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223003136) do
+ActiveRecord::Schema.define(version: 20180225021839) do
 
   create_table "collections", force: :cascade do |t|
     t.string   "collection_id", limit: 255
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180223003136) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "collections", ["museum_id"], name: "fk_rails_08649142e7", using: :btree
+  add_index "collections", ["museum_id"], name: "fk_rails_6f0086dec2", using: :btree
 
   create_table "example_categories", force: :cascade do |t|
     t.text     "description", limit: 65535
@@ -82,7 +82,19 @@ ActiveRecord::Schema.define(version: 20180223003136) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "items", ["collection_id"], name: "fk_rails_3063064cfa", using: :btree
+  add_index "items", ["collection_id"], name: "fk_rails_0d2eabbfa2", using: :btree
+
+  create_table "mediafiles", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "item_id",    limit: 4
+    t.string   "name",       limit: 255
+    t.string   "file",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "mediafiles", ["item_id"], name: "fk_rails_e993c3a1b0", using: :btree
+  add_index "mediafiles", ["user_id"], name: "fk_rails_4d4ff5b888", using: :btree
 
   create_table "museums", force: :cascade do |t|
     t.string   "cod_museum",    limit: 255
@@ -97,8 +109,8 @@ ActiveRecord::Schema.define(version: 20180223003136) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "museums", ["director_id"], name: "fk_rails_e8e95c22c8", using: :btree
-  add_index "museums", ["technician_id"], name: "fk_rails_813e63246a", using: :btree
+  add_index "museums", ["director_id"], name: "fk_rails_9e5396f0fd", using: :btree
+  add_index "museums", ["technician_id"], name: "fk_rails_331fe4d5ae", using: :btree
 
   create_table "system_access_to_nested_resources", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -308,6 +320,8 @@ ActiveRecord::Schema.define(version: 20180223003136) do
 
   add_foreign_key "collections", "museums", on_update: :cascade, on_delete: :cascade
   add_foreign_key "items", "collections", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "mediafiles", "items", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "mediafiles", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "museums", "users", column: "director_id", on_update: :cascade
   add_foreign_key "museums", "users", column: "technician_id", on_update: :cascade
 end

@@ -1,0 +1,14 @@
+<%=app_header_page%>
+
+  <%= form_for(@mediafile) do |f| %>
+
+                          <%=paper_input :references, f,"references", @mediafile.references %>
+
+      
+                                        <%=paper_input :name, f,"name", @mediafile.name %>
+
+      
+                    <% end %>
+
+<%=app_footer_page @mediafile,mediafiles_path%>
+<%=app_botton_save mediafiles_path %>

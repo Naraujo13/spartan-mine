@@ -856,7 +856,7 @@ module PaperHelper
     end
 
 
-    # Contrói o uploader para realizar o envio de arquivos
+  # Contrói o uploader para realizar o envio de arquivos
     #
     # === Parametros
     #
@@ -866,20 +866,27 @@ module PaperHelper
     # - icon::						String 			opcional com o icone
     # - multiple_files::	Boolean			permite ou não enviar mais de um arquivo
     #
-	def paper_upload_file label,f,field_name,icon="cloud_download",multiple_files=false
-        retorno = "<div class='row'>
-                        <div class='file-field input-field'>
-                          <div class='btn'>
-                            <span>#{label} <i class='material-icons'>attach_file</i></span>"
-        retorno += f.file_field field_name, multiple: multiple_files
-        retorno +="       </div>
-                          <div class='file-path-wrapper'>
-                            <input class='file-path validate' type='text'>
-                          </div>
-                        </div>
-                    </div>"
-		retorno.html_safe
-	end
+    def paper_upload_file label,f,field_name, file_exists=false, file_identifier = '', file_url = '', types = 'jpg jpeg png svg pdf mp3 wav flac mp4 avi mkv rmvb ogg',icon="cloud_download",multiple_files=false
+        
+               retorno = "<div class='row'>"
+               
+               if file_exists
+                   retorno += link_to "Baixar " + file_identifier, file_url.gsub!("public/", "")
+               end
+               
+               retorno += "<div class='file-field input-field'>
+                                 <div class='btn'>
+                                   <span>#{label} <i class='material-icons'>attach_file</i></span>"
+               retorno += f.file_field field_name, accept: types, multiple: multiple_files
+               retorno +="       </div>
+                                 <div class='file-path-wrapper'>
+                                   <input class='file-path validate' type='text'>
+                                 </div>
+                               </div>
+                           </div>"
+               retorno.html_safe
+           end
+       
 
     # Contrói o uploader para realizar o envio de arquivos
     #
