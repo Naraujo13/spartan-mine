@@ -1,0 +1,13 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+    <%=paper_input_show t("group_accesses_name"), @system_group_access.name, "social:group"%>
+
+    <%=paper_input_show t("group_accesses_description"), @system_group_access.description, "editor:insert-comment"%>
+
+    <%=paper_checkbox_show t("group_accesses_active"), @system_group_access.active, "visibility"%>
+
+  <%= app_footer_page_show system_group_accesses_path, edit_system_group_accesses_path(@system_group_access)%>
+
+<%= app_footer_show %>

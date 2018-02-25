@@ -1,0 +1,11 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+		<%=paper_input_show t("category_name"), @category_program.locate_label, "language"%>
+
+		<%=paper_input_show t("category_icon"), @category_program.icon, "editor:insert-emoticon"%>
+
+	<%= app_footer_page_show system_category_programs_path, edit_system_category_program_path(@category_program)%>
+
+<%= app_footer_show %>

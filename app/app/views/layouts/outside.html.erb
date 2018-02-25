@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=t "title_short"%></title>
+	<link rel="icon" type="image/png" href="/assets/logo/small.png" />
+	<link rel="author" href="https://plus.google.com/+GlaucoRobertoMunsberg" />
+	<meta name="description" content="<%=t "title"%>">
+	<meta property="og:title" content="<%=t "title_short"%>" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="/assets/logo/full.png" />
+	<meta property="og:url" content="<%=root_url%>" />
+	<meta property="fb:admins" content="100000197237018" />
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:url" content="<%=root_url%>">
+	<meta name="twitter:image" content="/assets/logo/full.png">
+	<meta name="twitter:description" content="<%=t "title_short"%>">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<%=javascript_include_tag 'outside', 'data-turbolinks-track' => true %>
+	<%=stylesheet_link_tag 'outside', media: 'all', 'data-turbolinks-track' => true %>
+	<%=csrf_meta_tags %>
+	<script async type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=new Date;
+        ga('create', '<%=System::Config.first.google_analytics_id%>', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+</head>
+<body >
+	<!-- Created the globalDialog-->
+    <div id="dialog_action" name='dialog_action' class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h2 id='dialog_title'><%=t("app_dialg_attention")%></h2>
+          <div id='dialog_context'>
+		  </div>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect waves-green btn-flat "><%=t("app_cancel")%></a>
+        </div>
+    </div>
+    <ul id="dropdown1" class="dropdown-content">
+                    <li>
+                        <a class="waves-effect waves-light btn-flat tooltipped btnFixNavbar" onClick="try{ga('send', 'event', 'atHome', 'homeLogin')}catch(exception){};document.location.href='<%= new_user_session_path%>'" data-tooltip="Entrar" style="color:#1a237e;margin-left: 0px; margin-right: 0px; padding-top:13px;"><i class="material-icons right" >lock</i><%=t'user_ssession_sign_in'%></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn-flat tooltipped btnFixNavbar" onClick="try{ga('send', 'event', 'atHome', 'homeCreate')}catch(exception){};document.location.href='<%= new_user_registration_path%>'" data-tooltip="Cadastrar Conta" style="color:#1a237e;margin-left: 0px; margin-right: 0px; padding-top:5px;"><i class="material-icons right" >input</i><%=t'user_registration_create'%></a>
+                </li>
+</ul>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="left brand-logo">
+                <img onclick="location.href='<%=root_path%>'" style="cursor:pointer;height:60px;auto; " src="<%= asset_path 'logo/negative.png'%>"/>
+            </a>
+
+            <ul id="nav-mobile"  class="right">
+
+                <li>
+                    <i><img class="tooltipped" data-tooltip='Aguarde...' data-position='botton' id='loader' src="/assets/system/puff.svg" type="image/svg+xml" style='display:none;padding-top: 10px;height: 50px; width: 50px;margin-right: 60px;'></i>
+                </li>
+
+                <% if user_signed_in? %>
+
+
+                    <li>
+                        <a class='waves-effect waves-light btn-flat tooltipped' onClick="try{ga('send', 'event', 'atHome', 'homeBackToInside')}catch(exception){};document.location.href='/dashboard'" data-tooltip="Área Privada" style="color:white"><i id='area_privada' class="material-icons clickable tooltipped" >swap_horiz</i></a>
+                    </li>
+
+
+                <% else %>
+
+            <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a class="waves-effect waves-light btn-flat tooltipped btnFixNavbar" onClick="try{ga('send', 'event', 'atHome', 'homeLogin')}catch(exception){};document.location.href='<%= new_user_session_path%>'" data-tooltip="Entrar no sistema" style="color:white;margin-left: 0px; margin-right: 0px; padding-top:5px;"><i class="material-icons right" >lock</i><%=t'user_ssession_sign_in'%></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn-flat tooltipped btnFixNavbar" onClick="try{ga('send', 'event', 'atHome', 'homeCreate')}catch(exception){};document.location.href='<%= new_user_registration_path%>'" data-tooltip="Cadastrar Conta" style="color:white;margin-left: 0px; margin-right: 0px; padding-top:5px;"><i class="material-icons right" >input</i><%=t'user_registration_create'%></a>
+                </li>
+
+            </ul>
+               <ul class="right hide-on-large-only">
+                  <!-- Dropdown Trigger -->
+                  <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">menu</i></a></li>
+                </ul>
+            </ul>
+           <% end %>
+
+
+            <nav class="nav-extended">
+                <div id='progress_loader' style='visibility:hidden;' class='progress'><div class='indeterminate'></div></div>
+            </nav>
+        </div>
+    </nav>
+
+        <%= yield %>
+
+</body>
+</html>

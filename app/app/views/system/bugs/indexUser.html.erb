@@ -1,0 +1,69 @@
+<!--app_header -->
+		<paper-tabs  name='app_tabs' id='app_tabs' selected='0' flex >
+		</paper-tabs>
+	</div>
+</paper-toolbar>
+<div class='container-fluid' >
+		<iron-pages id='app_pages' selected='0'>
+<!--app_header -->
+<!--app_header_page -->
+			<div>
+				<paper-material elevation='1' style='margin: 10px 10px;font-family:Roboto'>
+					<script>
+						$(document).ready(function(){
+							$('#controllers').html('<h2 style="font-weight: 100;">Reportar Erro</h2>')
+						})
+					</script>
+<!--app_header_page -->
+						<div class='horizontal layout around-justified center' style="margin:10px 0px 40px 0px;padding: 20px 0px 20px 0px;">
+							<div id="help_resume">
+								<h1 style='font-weight: 100;margin-left: -36px;'><%=t"bug_hello"%> <%=current_user.first_name%><%=t"bug_can_i_help"%> </h1>
+								<h3 style='margin-left: -20px;'><b><%=t"bug_report_a_erro"%></b></h3>
+								<p onclick="location.href='/system/help/#agendas'"> <b>1.</b> <%=t"bug_how_works"%></p>
+								<p onclick="location.href='/system/help/#apis'"> <b>2.</b> <%=t"bug_i_cant_report"%></p>
+								<p onclick="location.href='/system/help/#apis'"> <b>3.</b> <%=t"bug_system_dont_give_me_permission"%></p>
+							</div>
+							<div>
+								<%=image_tag "system/bookshelf.png", :style=>"width:250px"%>
+							</div>
+						</div>
+						<h1 style="margin-left:40px;font-weight: 100;"><%=t"bug_reported_problems"%></h2>
+
+							<% @system_bugs.each do |bug| %>
+								<div class='horizontal layout' style="margin-left:50px">
+									<paper-a id='paper_material_list' class='flex'>
+										<%if bug.bug_status_id != 2%>
+											<%=app_list_item bug.id,bug.problem[0..30],bug.updated_at,edit_system_bug_path(bug),edit_system_bug_path(bug),"bug-report",true,false%>
+										<%else%>
+											<%=app_list_item bug.id,bug.problem[0..30],bug.updated_at,edit_system_bug_path(bug),edit_system_bug_path(bug),"done-all",true,false%>
+										<%end%>
+									</paper-a>
+								</div>
+							<%end%>
+							<%if @system_bugs.empty?%>
+								<div class='flex'>
+									<iron-collapse opened id='empty_show'>
+										<div class='horizontal center-justified layout'>
+											<iron-icon icon='cloud-queue' style='width: 150px;height: 150px;margin-top: 30px;color:#8d8f95'></iron-icon>
+										</div>
+									</iron-collapse>
+								</div>
+							<%end%>
+
+
+<!-- app_footer_page-->
+					<%= app_botton_add new_system_bug_path%>
+				</paper-material>
+</div>
+
+<!-- app_footer_page-->
+<!-- app_footer-->
+		</iron-pages>
+<!-- app_footer-->
+</div>
+</div>
+<style>
+	#help_resume p{
+		cursor:pointer
+	}
+</style>

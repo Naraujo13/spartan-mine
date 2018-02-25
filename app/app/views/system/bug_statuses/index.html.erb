@@ -1,0 +1,18 @@
+<%= app_header%>
+
+	<%=app_header_page %>
+        
+        <%=list_header @system_bug_statuses, system_bug_statuses_path%>
+            
+                
+            <% @system_bug_statuses.each do |system_bug_status| %>
+
+                <%=list_item system_bug_status.id, system_bug_status.description, system_bug_status.updated_at, edit_system_bug_status_path(system_bug_status), "adb"%>
+
+            <% end %>
+            
+        <%=list_footer %>
+
+	<%= app_footer_page @system_bug_statuses, system_bug_statuses_path%>
+<%=app_footer%>
+<%= app_botton_add new_system_bug_status_path%>

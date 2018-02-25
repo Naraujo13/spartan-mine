@@ -1,0 +1,32 @@
+<%=app_header_page%>
+  
+
+    <%= form_for(@system_program) do |f| %>
+
+       <%=paper_input t("program_name"), f,"locate_label",@system_program.locate_label,"apps"%>
+
+       <%=paper_input t("program_description"), f,"descricao",@system_program.description,"inser_comment"%>
+
+       <%=paper_input t("program_andress"), f,"path",@system_program.path,"public"%>
+
+       <div class="row">
+           <div class="col s6">
+               <%=paper_input t("program_icon"), f,"icon",@system_program.icon,"insert_emoticon"%>
+           </div>
+           <div class="col s6">
+               <%=paper_input t("program_position"),f,"position",@system_program.position,"format_list_numbered",false,"number"%>
+           </div>
+       </div>
+
+       <div class='row'>
+         <div class='col s6'>
+           <%=paper_select t("program_category"),f,f.object.category_program_id,"category_program_id",:category_program_id, System::CategoryProgram.all,"id","locate_label","menu"%>
+         </div>
+         <div class='col s6'>
+           <%=paper_checkbox t("program_visible"), f, :visible, f.object.visible, "visible","visibility"%>
+         </div>
+       </div>
+       
+    <% end %>
+<%=app_footer_page @system_program, system_programs_path%>
+<%=app_botton_save system_programs_path %>

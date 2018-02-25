@@ -1,0 +1,19 @@
+<%=app_header_page%>
+  
+
+    <%= form_for(@category_program) do |f| %>
+
+       <%=paper_input t("category_name"), f,"locate_label",@category_program.locate_label,"menu"%>
+
+       <div class="row">
+           <div class="col s6">
+               <%=paper_input t("category_icon"), f,"icon",@category_program.icon,"insert_emoticon"%>
+           </div>
+           <div class="col s6">
+               <%=paper_input t("category_position"),f,"position",@category_program.position,"format_list_numbered",false,"number"%>
+           </div>
+       </div>
+
+    <% end %>
+<%=app_footer_page @category_program, system_category_programs_path%>
+<%=app_botton_save system_category_programs_path %>

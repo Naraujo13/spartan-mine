@@ -1,0 +1,26 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+		<%=paper_input_show t("program_name"), @system_program.locate_label, "apps"%>
+
+		<%=paper_input_show t("program_description"), @system_program.description, "editor:insert-comment"%>
+
+		<%=paper_input_show t("program_andress"), @system_program.path, "social:public"%>
+
+		<%=paper_input_show t("program_icon"), @system_program.icon, "editor:insert-emoticon"%>
+
+		<div class='horizontal layout center'>
+
+			<div class='flex'>
+				<%=paper_select_show t("program_category"),@system_program.category_program_id,System::CategoryProgram.order("name"), "id","name"%>
+			</div>
+			<div class='flex'>
+				<%=paper_checkbox_show t("program_visible"), @system_program.visible, "visibility"%>
+			</div>
+
+		</div>
+
+	<%= app_footer_page_show system_programs_path, edit_system_program_path(@system_program)%>
+
+<%= app_footer_show %>

@@ -1,0 +1,27 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+		<%=paper_input_show t("post_title"), @example_post.title, "assignment"%>
+
+		<%=paper_input_show t("post_description"), @example_post.description, "editor:format-quote"%>
+
+		<%=paper_editor_show t("post_content"), @example_post.content, "editor:mode-comment"%>
+
+		<%=paper_relation_nn_show t("tag_tags"),'example_posts_id',@example_post.id, '/example/post_tags/list/','title'%>
+
+		<div class='horizontal layout center'>
+      <div class='flex'>
+        <%=paper_chooser_file_show t("post_image"),"url_image","/data/"+@example_post.url_image%>
+      </div>
+      <div class='flex'>
+        <%=paper_select_show t("post_category"), @example_post.example_category_id, Example::Category.all,"id","description"%>
+				<%=paper_date_select_show t("post_publish_at"), @example_post.publish_at, "today"%>
+        <%=paper_input_show t("post_likes"), @example_post.plus_one, "thumb-up"%>
+        <%=paper_checkbox_show t("post_public"), @example_post.public,"done" %>
+      </div>
+    </div>
+
+	<%= app_footer_page_show example_posts_path, edit_example_post_path(@example_post)%>
+
+<%= app_footer_show %>

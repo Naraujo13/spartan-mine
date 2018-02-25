@@ -1,0 +1,22 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+        
+        <%=card_header @example_posts, example_posts_path%>
+
+            <% @example_posts.each do |example_post| %>
+
+                <%=card_item example_post.id,example_post.title,example_post.description, edit_example_post_path(example_post)%>
+                
+            <% end %>
+
+        <%=card_footer%>
+
+	<%=app_footer_page @example_posts, example_posts_path,@total%>
+<%=app_footer%>
+<%=app_botton_add new_example_post_path%>
+<script>
+    function printReport(type){
+		printCallback('/example/tags/report','atHome Posts','reports/athome_posts',type)
+	}
+</script>

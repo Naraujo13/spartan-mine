@@ -1,0 +1,152 @@
+<polymer-element name="my-element">
+    <template>
+      <style>
+        :host {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+        }
+        #core_drawer_panel {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+        }
+        #section {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+        }
+        #section1 {
+          height: 100%;
+          box-sizing: border-box;
+          background-color: white;
+        }
+        #core_header_panel {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          background-color: #f4f4f4;
+        }
+        #core_toolbar {
+          color: white;
+          background-color: #00bcd4;
+          box-shadow: rgb(158, 158, 158) 0px 2px 3px;
+        }
+        #core_toolbar1 {
+          color: white;
+          box-shadow: rgb(158, 158, 158) 0px 3px 6px;
+          background-color: #00bcd4;
+        }
+        core-toolbar.tall {
+          height: 235px;
+        }
+        #section2 {
+          height: 400px;
+          
+          margin-top: -12px;
+        }
+        #core_scroll_header_panel {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        }
+        .content {
+          padding: 10px 30px;
+        }
+        .title {
+          -webkit-transform-origin: 0px 50%;
+          transform-origin: 0px 50% 0px;
+          font-size: 28px;
+        }
+        #div3 {
+          width: 300px;
+          height: 400px;
+        }
+        core-icon-button {
+            color: #2d2d2d);
+        }
+        paper-icon-button {
+            color: #2d2d2d;
+        }
+      </style>
+
+      <core-drawer-panel transition="" id="core_drawer_panel" touch-action="" responsivewidth="1024px">
+
+        <section id="section" drawer="">
+          <core-header-panel mode="standard" id="core_header_panel">
+            <core-toolbar id="core_toolbar">
+              <div id="div">Menu</div>
+            </core-toolbar>
+            <section id="section2">
+              <core-menu selected="1" id="core_menu">
+                <core-submenu style="cursor:pointer" onclick="document.location.href='&lt;%= root_path+" dashboard"%="">'" icon="dashboard" label="Dashboard"&gt;</core-submenu>
+                <core-submenu icon="apps" label="Aplica&#xE7;&#xF5;es">
+  
+                  
+                  <paper-item onclick="document.location.href='/campus'"> 
+                      <core-icon icon="account-balance"/> Campus
+                  </paper-item>
+                  <paper-item onclick="document.location.href='/agendas'"> 
+                      <core-icon icon="event"/>Agenda
+                  </paper-item>
+                </core-submenu><core-submenu icon="settings" label="Configura&#xE7;&#xE3;o">
+                  <paper-item onclick="document.location.href='&lt;%= edit_user_registration_path%&gt;'">
+                    <core-icon icon="account-circle"/>Conta
+                  </paper-item>
+                  <paper-item onclick="document.location.href='/account'"> 
+                      <core-icon icon="account-child"/>Contas
+                  </paper-item>
+                </core-submenu>
+              </core-menu>
+
+            </section>
+          </core-header-panel>
+        </section>
+        <section id="section1" main="">
+          <core-header-panel headermargin="128" id="core_scroll_header_panel">
+            <core-toolbar id="core_toolbar1">
+              <paper-icon-button id="navicon" icon="menu" on-tap="{{togglePanel}}"></paper-icon-button> 
+              <div id="div1" flex=""></div>
+              <core-tooltip label="&lt;%=current_user.first_name%&gt;">
+                <paper-icon-button onclick="document.location.href='&lt;%= edit_user_registration_path%&gt;'" icon="account-circle" id="core_icon_button2"></paper-icon-button>
+              </core-tooltip>
+              
+              <paper-icon-button onclick="document.location.href='&lt;%=root_path%&gt;'" icon="social:public" id="core_icon_button2"></paper-icon-button>
+              <div id="div2" class="bottom indent title">&lt;%=controller.controller_name%&gt;</div>
+            </core-toolbar>
+            <div id="body_app" class="container-fluid" style="margin:25px 10px 0px 10px">
+              &lt;%= yield %&gt;
+            </div>
+            
+          </core-header-panel>
+
+        </section>
+
+    </core-drawer-panel></template>
+
+    <script>
+      var scope;
+      Polymer('my-element', {
+        togglePanel: function() {
+          this.$.core_drawer_panel.togglePanel();
+        }
+      });
+      $(document).ready(function(){
+        application_polymer = document.querySelector('my-element');
+      })
+      
+    </script>
+
+  </polymer-element>

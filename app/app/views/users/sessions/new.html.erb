@@ -1,0 +1,88 @@
+<%= form_for(resource, :as => resource_name,:url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+    <% if notice or alert
+            if notice
+                notification = notice
+            else
+                notification = alert
+            end
+            if notification != 'Saiu com sucesso.'
+    %>
+    <script>
+        $(document).ready(function(){
+            dialogOpen('Login',"<%=notification%>","<%=t'app_understood'%>");
+        });
+    </script>
+    <% end
+    end %>
+<div class="row" style="padding:60px 20px 0px 20px">
+    <div class='col s6 hide-on-med-and-down' id="image" style="text-align:center"  >
+        <img style="width:100%;height:auto" src="/assets/system/locked.png" >
+        <h3><%=t"user_ssession_title"%></h3>
+        <p style="text-align: center"><%= t 'title_short'%> <%=t"user_ssession_descrip"%></p>
+    </div>
+    <div class='col s12 m12 l6' >
+        <div class='z-depth-5 cardLogin' >
+            <h3>Entrar no Domum</h3>
+            <div class="row" style="margin-bottom: 0px;">
+                <%=paper_input "Email", f,"email",@user.email,"email"%>
+                <%=paper_input t("user_ssession_password"), f,"password",@user.password,"lock_outline",false,"password"%>
+            </div>
+            <div class="row" style="margin-bottom: 0px;padding-left: 10px;">
+                <div class="col s12 m6 l4">
+						<%=paper_checkbox t("user_ssession_remember"),f,:remember_me,true,"remember_me"," "%>
+                </div>
+                <div class="col s12 m6 l8" >
+                    <a class="waves-effect waves-teal btn-flat" onclick="location.href='/users/password/new'"><i class="material-icons right">live_help</i><%=t"user_ssession_forgot"%></a>
+                    <%if notification != nil%>
+                        <a class="waves-effect waves-teal btn-flat" onClick="try{ga('send', 'event', 'atHome', 'loginEnterPressed')}catch(exception){};location.href='/users/confirmation/new'" data-position="top" data-tooltip="<%=t'user_confirmation'%>"><i class="material-icons right">security</i><%=t'user_confirmation'%></a>
+                    <%end%>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 0px;margin-left:20px">
+                <a href="<%=user_omniauth_authorize_path(:facebook)%>" class="sc-btn sc--facebook sc--tiny sc--flat">
+                  <span class="sc-icon">
+                      <svg viewBox="0 0 33 33" width="25" height="25" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M 17.996,32L 12,32 L 12,16 l-4,0 l0-5.514 l 4-0.002l-0.006-3.248C 11.993,2.737, 13.213,0, 18.512,0l 4.412,0 l0,5.515 l-2.757,0 c-2.063,0-2.163,0.77-2.163,2.209l-0.008,2.76l 4.959,0 l-0.585,5.514L 18,16L 17.996,32z"></path></g></svg>
+                  </span>
+                  <span class="sc-text">
+                      <%=t'user_facebook_login'%>
+                  </span>
+                </a>
+                <a href="<%=user_omniauth_authorize_path(:google_oauth2)%>" class="sc-btn sc--google-plus sc--tiny sc--flat">
+                  <span class="sc-icon">
+                      <svg viewBox="0 0 33 33" width="25" height="25" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M 17.996,32L 12,32 L 12,16 l-4,0 l0-5.514 l 4-0.002l-0.006-3.248C 11.993,2.737, 13.213,0, 18.512,0l 4.412,0 l0,5.515 l-2.757,0 c-2.063,0-2.163,0.77-2.163,2.209l-0.008,2.76l 4.959,0 l-0.585,5.514L 18,16L 17.996,32z"></path></g></svg>
+                  </span>
+                  <span class="sc-text">
+                      <%=t'user_google_login'%>
+                  </span>
+                </a>
+            </div>
+            <div class="row" style='position: relative;margin: 0px 10px -45px 0px;'>
+                <div class="col s6">
+
+                </div>
+                <div class='col s2 offset-s4'>
+                    <a class="btn-floating btn-large waves-effect waves-light tooltipped" onClick="try{ga('send', 'event', 'atHome', 'loginEnterPressed')}catch(exception){};sigin()" data-position="top" data-tooltip="<%=t'user_ssession_sign_in'%>"><i class="material-icons">arrow_forward</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
+<script type="text/javascript">
+	$( window ).resize(function(){
+		if($(window).width() < 640){
+			$("#image").css('display','none')
+		}else{
+			$("#image").css('display','')
+		}
+	});
+	$(document).keypress(function(e) {
+		if(e.which == 13) {
+			document.querySelector('form').submit()
+		}
+	});
+	function sigin(){
+		$(document.querySelector('form')).submit()
+	}
+	try{ga('send', 'event', 'atHome', 'loginVisitation')}catch(exception){};
+</script>

@@ -1,0 +1,53 @@
+<%%=app_header_page%>
+
+  <%%= form_for(@<%= singular_table_name %>) do |f| %>
+
+    <% attributes.each do |attribute| -%>
+    <% if attribute.password_digest? -%>
+      <div class="row" >
+        <div class="col s12 m6 l6">
+          <%%= f.label :password %><br>
+          <%%= f.password_field :password %>
+        </div>
+        <div class="col s12 m6 l6">
+          <%%= f.label :password_confirmation %><br>
+          <%%= f.password_field :password_confirmation %>
+        </div>
+      </div>
+      <% else -%>
+      <% if [:text, :text_area,"text_area"].include? attribute.field_type -%>
+      <%%=paper_editor :<%= attribute.column_name %>, f,"<%= attribute.column_name %>", @<%= singular_table_name %>.<%= attribute.column_name %>,"mode_comment"%>
+
+      <% elsif [:integer, :float,:decimal,:number_field].include? attribute.field_type -%>
+      <%%=paper_input :<%= attribute.column_name %>, f,"<%= attribute.column_name %>", @<%= singular_table_name %>.<%= attribute.column_name %>,"",false,"number"%>
+
+      <% elsif [:boolean,:check_box].include? attribute.field_type -%>
+      <%%=paper_checkbox :<%= attribute.column_name %>, f, :<%= attribute.column_name %>, f.object.<%= attribute.column_name %>, "<%= attribute.column_name %>","done"%>
+
+      <% elsif [:string,:text_field].include? attribute.field_type -%>
+      <% if attribute.default == nil-%>
+      <%%=paper_select :<%= attribute.column_name %>,f,f.object.<%= attribute.column_name %>,"<%= attribute.column_name %>",:<%= attribute.column_name %>, <%= attribute.name.camelize %>.all,"id","description","turned_in"%>
+
+      <%else-%>
+      <%%=paper_input :<%= attribute.column_name %>, f,"<%= attribute.column_name %>", @<%= singular_table_name %>.<%= attribute.column_name %> %>
+
+      <%end%>
+      <% elsif [:date, :date_select].include? attribute.field_type -%>
+      <%%=paper_date_select :<%= attribute.column_name %>,f,f.object.<%= attribute.column_name %>,:<%= attribute.column_name %>,"<%= attribute.column_name %>","today",nil,false%>
+
+      <% elsif [:datetime].include? attribute.field_type -%>
+      <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+
+      <% elsif [:references].include? attribute.field_type -%>
+      <%%=paper_select :<%= attribute.column_name %>,f,f.object.<%= attribute.column_name %>,"<%= attribute.column_name %>",:<%= attribute.column_name %>, <%= attribute.name.camelize %>.all,"id","description","turned_in" %>
+
+      <% else -%>
+      <%%=f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+
+      <% end -%>
+      <% end -%>
+      <% end -%>
+  <%% end %>
+
+<%%=app_footer_page @<%= singular_table_name %>,<%= plural_table_name %>_path%>
+<%%=app_botton_save <%= plural_table_name %>_path %>

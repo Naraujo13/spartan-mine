@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: MyString
+  name: MyString
+  references: 
+  year: 2018-02-23 00:31:36
+  status: MyString
+  lenght: 1.5
+  height: 1.5
+  width: 1.5
+  thickness: 1.5
+  aquisition_date: 2018-02-23 00:31:36
+  outer_circumference: 1.5
+  inner_circumference: 1.5
+  weight: 1.5
+  conservation_sate: MyString
+  biography: MyString
+  description: MyString
+
+two:
+  item_id: MyString
+  name: MyString
+  references: 
+  year: 2018-02-23 00:31:36
+  status: MyString
+  lenght: 1.5
+  height: 1.5
+  width: 1.5
+  thickness: 1.5
+  aquisition_date: 2018-02-23 00:31:36
+  outer_circumference: 1.5
+  inner_circumference: 1.5
+  weight: 1.5
+  conservation_sate: MyString
+  biography: MyString
+  description: MyString

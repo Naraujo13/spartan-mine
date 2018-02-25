@@ -1,0 +1,386 @@
+// Domum
+
+$(document).ready(function(){
+    // inialize the materializecss
+    $('.modal').modal();
+    $('.tooltipped').tooltip({delay: 50});
+    $(".brand-menu").sideNav();
+    $('.collapsible').collapsible();
+    $('select').material_select();
+    $('ul.tabs').tabs('select_tab', 'tab_id');
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 200, // Creates a dropdown of 15 years to control year
+        format: 'd mmmm yyyy',
+        monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        weekdaysFull: ['Domingo', 'Segunda-feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+        weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        today: 'Hoje',
+        clear: 'Limpar',
+        close: 'Fechar',
+        labelMonthNext: 'Próximo mês',
+        labelMonthPrev: 'Mês anterior',
+        labelMonthSelect: 'Selectione o mês',
+        labelYearSelect: 'Selecione o ano',
+
+
+    });
+
+    $(document).ajaxSend(function() {
+        loader(true);
+    });
+    $(document).ajaxComplete(function() {
+        loader(false);
+    });
+
+    if (typeof printReport === 'function') {
+        document.querySelector('#shift_print').style.display = ''
+    }
+
+    document.addEventListener('keyup', listenToTheKeys, false);
+
+    // Select the tab to show
+    $('ul.tabs').on('click', 'a', function(e) {
+        location.href = "#"+e.target.href.split("#")[1]
+    });
+
+    window.setInterval(function(){
+      checkNotificationsToShow() // Verify notification
+    }, 5000);
+});
+function listenToTheKeys(e){
+
+    if(e.altKey && e.keyCode == 83){
+        //console.log('alt+s')
+        keySPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 72){
+        //console.log('alt+h')
+        try {
+            ga('send', 'event', 'atHome', 'accessibilityHelpClicked')
+        } catch (exception) {};
+        location.href = '/help';
+        return;
+    }
+    if(e.altKey && e.keyCode == 76){
+        //console.log('alt+l')
+        try {
+            ga('send', 'event', 'atHome', 'accessibilityLocationClicked')
+        } catch (exception) {};
+        document.querySelector('#locates').style.display = '';
+        $("#dialog_locales").modal('open');
+        return;
+    }
+    if(e.altKey && e.keyCode == 73){
+        //console.log('alt+i')
+        keyIPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 78){
+        //console.log('alt+n')
+        keyNPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 66){
+        //console.log('alt+b')
+        keyBPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 68){
+        //console.log('alt+d')
+        keyDPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 80){
+        //console.log('alt+p')
+        keyPPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 84){
+        //console.log('alt+t')
+        try {
+            ga('send', 'event', 'atHome', 'accessibilityTutorialClicked')
+        } catch (exception) {};
+        openTutorial();
+        return;
+    }
+    if(e.altKey && e.keyCode == 65){
+        //console.log('alt+a')
+        try {
+            ga('send', 'event', 'atHome', 'accessibilityMenuClicked')
+        } catch (exception) {};
+        $("#dialog_accessibility").modal('open');
+        document.querySelector('#shift_command').style.display = '';
+        return;
+    }
+    if(e.altKey && e.keyCode == 79){
+        //console.log('alt+o')
+        keyOPressed();
+        return;
+    }
+    if(e.altKey && e.keyCode == 69){
+        //console.log('alt+e')
+        try {
+            ga('send', 'event', 'atHome', 'accessibilitySignOutClicked')
+        } catch (exception) {};
+        location.href = '/users/sign_out';
+        return;
+    }
+}
+function toast(message,time=1000){
+    Materialize.toast(message, 100)
+}
+
+function loader(status=true){
+    if(document.querySelectorAll('#app_tabs .tabs li').length == 0){
+        document.querySelector('#loader').style.marginRight='60px';
+    }else{
+        document.querySelector('#loader').style.marginRight='0px';
+    }
+    if(status){
+        document.querySelector('#loader').style.display='';
+        document.querySelector('#progress_loader').style.visibility = 'visible';
+    }else{
+        document.querySelector('#loader').style.display='none';
+        document.querySelector('#progress_loader').style.visibility = 'hidden';
+    }
+}
+
+
+// ------------------
+// DIALOGO
+
+function dialogOpen(title, context, btnOk, btnCancel, functionOk, functionMorInformation) {
+
+  var dialog = document.querySelector("#dialog_action");
+  var dialog_title = document.querySelector('#dialog_title');
+  $(dialog_title).html(title)
+  var dialog_context = document.querySelector('#dialog_context');
+  $(dialog_context).html(context)
+  var dialog_btns = document.querySelector('#dialog_btns');
+  $(dialog_btns).html('');
+
+  if (functionMorInformation!="") {
+    //$(dialog_btns).append("<paper-button onclick='functionMorInformation'>Mais informações</paper-button>")
+  }
+  if (btnOk != "") {
+      $(dialog_btns).append("<a href='#!' onclick='" + functionOk + "'  class='modal-action modal-close waves-effect waves-green btn-flat'>"+btnOk+"</a>")
+  }
+  if (btnCancel != "") {
+      $(dialog_btns).append("<a href='#' class='modal-action modal-close waves-effect waves-green btn-flat'>"+btnCancel+"</a>")
+  }
+
+  $("#dialog_action").modal('open');
+}
+
+function dialogClose() {
+  var dialog = document.querySelector("#dialog_action");
+  dialog.close();
+}
+
+// MENU SEARCH LISTS
+function showAll() {
+  registers = document.querySelector('#paper_material_list').querySelectorAll('iron-collapse[opened]');
+  for (a = 0; a < registers.length; a++) {
+    if (!registers[a].opened) {
+      registers[a].toggle();
+    }
+  }
+}
+
+// SEARCH HELP
+function searchHelpValueChange(value) {
+  if ($('#app_help_search').val().length > 2) {
+
+    stringSearch = replaceSpecialChars(value.toLowerCase());
+    registers = document.querySelectorAll('iron-collapse[opened]');
+    registers[0].opened = false;
+    for (a = 1; a < registers.length; a++) {
+
+      fieldsToSearch = []
+      fieldsToSearch.push(registers[a].getElementsByClassName("title")[0]);
+      fieldsToSearch.push(registers[a].getElementsByClassName("medium")[0]);
+      fieldsToSearch.push(registers[a].getElementsByClassName("big")[0]);
+      finded = false;
+      for (b = 0; b < fieldsToSearch.length; b++) {
+        textToSearch = replaceSpecialChars($(fieldsToSearch).text().toLowerCase());
+
+        if (textToSearch.indexOf(stringSearch) > -1) {
+          finded = true;
+          //console.log('achou!')
+        }
+      }
+
+      registers[a].opened = finded;
+
+    }
+  } else {
+    showAllSearch();
+  }
+}
+
+function showAllSearch() {
+  registers = document.querySelectorAll('iron-collapse[opened]');
+  registers[0].opened = true;
+  for (a = 1; a < registers.length; a++) {
+    if (!registers[a].opened) {
+      registers[a].toggle();
+    }
+  }
+}
+
+// NOTIFICATION
+//Function that check if have some notification to send to user logged
+function checkNotificationsToShow() {
+  var haveBugsNotifications = false;
+  var haveNotifications = false;
+  $(document.querySelector("#notifications_number")).attr('label', '..');
+  $.ajax({
+    url: "/system/central/notifications/",
+    dataType: "json",
+    data: {
+
+    },
+    success: function($data) {
+      value = $data;
+      for (a = 0;
+        (a < 8 && a < value.length); a++) {
+
+        if (value[a].displayed == false) {
+          haveNotifications = true;
+        }
+      }
+      if (haveNotifications) {
+          $('#notifications_icon').html('notifications_active');
+          $('#notifications_number').html(value.length);
+      } else {
+          $('#notifications_icon').html('notifications_none');
+          $('#notifications_number').html("0");
+      }
+
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+        $('#notifications_icon').html('notifications_off');
+    }
+  });
+
+  if ((haveNotifications || haveBugsNotifications)) {
+      $('#notifications_icon').html('notifications_none');
+  }
+
+}
+
+// AUX
+function replaceSpecialChars(str) {
+  str = str.replace(/[àáâãäå]/, "a");
+  str = str.replace(/[èéêë]/, "e");
+  str = str.replace(/[õô]/, "o");
+  str = str.replace(/[í]/, "i");
+  str = str.replace(/[èéêë]/, "e");
+  str = str.replace(/[ú]/, "u");
+  str = str.replace(/[ç]/, "c");
+  return str.replace(/[^a-z 0-9]/gi, '');
+}
+
+// Verify if the function help is defined then call him, or call the default help
+function def_help() {
+  if (typeof(help) == "function") {
+    help();
+  } else {
+    location.href = '/system/help'
+  }
+}
+
+// function that delay something to work
+var delay = (function() {
+  var timer = 0;
+  return function(callback, ms) {
+    clearTimeout(timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+
+function keyBPressed() {
+  history.back();
+}
+
+function changeLocate(lng) {
+  $.ajax({
+    url: "/system/central/setLocate",
+    dataType: "json",
+    data: {
+        "locate": lng
+    },
+    success: function($data) {
+        location.reload()
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+
+    }
+  });
+}
+
+// Called to execute to fix the tabs,printer call,
+//  accessibily and others
+
+// Print Functions
+var print_name = '';
+var print_name_file= '';
+var name_report = '';
+function showPrintAdvancedOptions(){
+    if(document.querySelector('#dialog_print div[advanced]').style.display == ""){
+        document.querySelector('#dialog_print div[advanced]').style.display = "none";
+    }else{
+        document.querySelector('#dialog_print div[advanced]').style.display = ""
+    }
+    document.querySelector('#dialog_print').refit();
+}
+
+function keyPPressed(){
+    document.querySelector('#dialog_print div[advanced]').style.display = "none";
+    document.querySelector('#dialog_print').open();
+    document.querySelector('#dialog_print').refit();
+}
+
+function printCallback(p_url_method,p_name, p_report_url,p_report_type){
+    // p_url_method     "/example/tags/report"
+    // p_name           "atHome Tags"
+    // p_report_url     "reports/athome_tags"
+    // p_report_type    "pdf"
+    document.querySelector('#dialog_print').close();
+    $.ajax({
+        url: p_url_method,
+        dataType: "json",
+        data: {
+            p_name: p_name,
+            p_report_url: p_report_url,
+            p_report_type: p_report_type
+        },
+        beforeSend: function(){
+            document.querySelector('#progress_loader').style.display = '';
+        },
+        complete: function(){
+            document.querySelector('#progress_loader').style.display = 'none';
+        },
+        success: function($data) {
+          if($data != null && $data.success){
+              $('#toast').attr('text','<%=I18n.t'app_print_success'%>');
+              document.querySelector('#toast').toggle();
+
+              $('#a_download').attr('download',$data.file_name);
+              document.querySelector('#a_download').href = $data.file;
+              document.querySelector('#a_download').click();
+          }else{
+              $('#toast').attr('text','<%=I18n.t'app_print_error'%>');
+              document.querySelector('#toast').toggle();
+          }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          $('#toast').attr('text','<%=I18n.t'app_print_error'%>');
+          document.querySelector('#toast').toggle()
+        }
+      });
+}

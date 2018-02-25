@@ -1,0 +1,10 @@
+<%=@page_index = params[:tab]%>
+$('#collection_<%=params[:tab]%>').html('')
+<%
+ @system_bug_messages.each do |registro|
+  %>
+     $('#collection_<%=params[:tab]%>').append(`<%=list_item registro.id,registro.message[0..40],registro.updated_at, edit_system_bug_message_path(registro),'forum'%>`);
+  <%
+ end
+%>
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@system_bug_messages, :remote => true).to_s) %>');

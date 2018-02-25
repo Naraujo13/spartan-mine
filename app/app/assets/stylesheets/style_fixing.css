@@ -1,0 +1,6 @@
+.input-field .prefix ~ input{
+    margin-bottom: 0px !important
+}
+.dataTables_empty{
+    text-align: center /* fixing DATATABLE align to center */
+}

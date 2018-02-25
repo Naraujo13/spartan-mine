@@ -1,0 +1,79 @@
+<%=app_header_show [t("account_account"),t("account_permissions")]%>
+	<%=app_header_page_show notice%>
+		<div>
+			<div class='horizontal layout end'>
+				<div class='one'>
+					<paper-icon-button id="bookmark-button" icon="social:person"></paper-icon-button>
+				</div>
+				<div class='flex' style="margin-right: 1px">
+					<paper-input disabled label="<%=t"account_your_name"%>" type="text" value="<%=@user.first_name%>" name="user[first_name]"  id="user_first_name"></paper-input>
+				</div>
+				<div class='flex'>
+					<paper-input disabled label="<%=t"account_last_name"%>" type="text" value="<%=@user.last_name%>" name="user[last_name]"  id="user[last_name]"></paper-input>
+				</div>
+			</div>
+			<div class='horizontal layout end'>
+				<div class='one'>
+					<paper-icon-button id="bookmark-button" icon="communication:email" style="fill:steelblue;"></paper-icon-button>
+				</div>
+				<div class='flex'>
+					<paper-input  disabled type="text" label="Email" value="<%=@user.email%>" name="user[email]" ></paper-input>
+				</div>
+			</div>
+			<div class='horizontal layout center'>
+				<div clas='flex'>
+					<%=paper_input_phone_show t("account_phone"),@user.phone_number%>
+				</div>
+				<div clas='flex'>
+					<%=paper_date_select_show t("account_birth"),@user.born,"social:cake",true%>
+				</div>
+				<div clas='one'>
+					<%=paper_checkbox_show t("account_admin"),@user.admin, "supervisor-account"%>
+				</div>
+			</div>
+
+
+		</div>
+    <%=app_footer_page_show users_path, edit_user_path(@user)%>
+    <%=app_header_page_show notice%>
+        <div>
+			<% result = System::AccessTo.where("user_id"=>@user.id)
+			   @my_programs_id = []
+			   result.each do |value|
+				@my_programs_id.push(value.program_id)
+			   end
+			%>
+			<h1 style="margin-top: 10px;"><iron-icon icon='social:people-outline' style='margin-right:5px'></iron-icon> <%=t"account_access_group"%></h1>
+			<%if @my_programs_id.count == System::Program.all.count%>
+			  <paper-radio-group  selected="<%=t"account_gestor"%>" style="margin-left: 10px;">
+			<%else%>
+			  <paper-radio-group selected="<%=t"account_none"%>" style="margin-left: 10px;">
+			<%end%>
+				<paper-radio-button disabled name="gestor"><%=t"account_super_gestor"%></paper-radio-button>
+				<paper-radio-button disabled name="nenhum"><%=t"account_user"%></paper-radio-button>
+			  </paper-radio-group>
+			<h1 style="margin-top: 10px;"><iron-icon icon='social:person-outline' style='margin-right:5px'></iron-icon><%=t"account_allowed_programs"%></h1>
+			<paper-menu selected="1" style="margin-left: 18px;">
+              <%
+                System::CategoryProgram.all.each do |category|
+
+                  %>
+                    <paper-item ><%=category.name%></paper-item>
+                      <%
+                        System::Program.where("category_program_id ="+category.id.to_s).order("name").each do  | program|
+                            %>
+                             <paper-item >
+                                <% if @my_programs_id.include? program.id%>
+                                 <paper-checkbox disabled checked value="<%=program.id%>" onClick="checkProgramChanged(this)" for label=''></paper-checkbox> <iron-icon icon="<%=program.icon%>" style="margin-left:10px"></iron-icon> <%=program.name%>
+                                <%else%>
+                                  <paper-checkbox disabled value="<%=program.id%>" onClick="checkProgramChanged(this)" for label=''></paper-checkbox> <iron-icon icon="<%=program.icon%>" style="margin-left:10px"></iron-icon> <%=program.name%>
+                                <%end%>
+                             </paper-item>
+                            <%
+                        end
+                end
+              %>
+        	</paper-menu>
+		</div>
+    <%=app_footer_page_show users_path, edit_user_path(@user)%>
+<%=app_footer_show %>

@@ -1,0 +1,8 @@
+<%=app_header_page%>
+    <%= form_for(@example_category) do |f| %>
+        
+        <%=paper_input t("example_category_description"), f,"description",@example_category.description,""%>
+    <% end %>
+
+<%=app_footer_page @example_category,example_categories_path%>
+<%=app_botton_save example_categories_path %>

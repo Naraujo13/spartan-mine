@@ -1,0 +1,25 @@
+<%=app_header_page%>
+
+  <%= form_for(@museum) do |f| %>
+
+    <%=paper_input "Código do Museu", f,"cod_museum", @museum.cod_museum %>
+
+    <%=paper_input "Nome", f,"name", @museum.name, "edit" %>
+
+    <%=paper_select "Diretor", f, "director_id", "director_id", @museum.director_id, User.all, "id", "first_name", "assignment_ind" %> 
+
+    <%=paper_select "Técnico", f, "technician_id", "technician_id", @museum.technician_id, User.all, "id", "first_name", "build" %> 
+
+    <%=paper_input "Endereço", f,"address", @museum.address, "home" %>
+
+    <%=paper_input "Telefone", f,"phone", @museum.phone, "phone" %>
+
+    <%=paper_input "Horário de Abertura", f,"opening_hours", @museum.opening_hours, "today" %>
+
+    <%=paper_input "Descrição", f,"description", @museum.description, "assignment" %>
+
+      
+  <% end %>
+
+<%=app_footer_page @museum,museums_path%>
+<%=app_botton_save museums_path %>

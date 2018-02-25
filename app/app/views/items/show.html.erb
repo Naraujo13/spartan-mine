@@ -1,0 +1,54 @@
+<%=app_header_page%>
+
+  <%= form_for(@item) do |f| %>
+
+                          <%=paper_input :item_id, f,"item_id", @item.item_id,"",true%>
+
+      
+                                        <%=paper_input :name, f,"name", @item.name,"",true%>
+
+      
+                                        <%=paper_input :references, f,"references", @item.references,"",true%>
+
+      
+                                  <%=f.datetime_select :year %>
+
+                                        <%=paper_input :status, f,"status", @item.status,"",true%>
+
+      
+                                        <%=paper_input :lenght, f,"lenght", @item.lenght,"",true%>
+
+      
+                                        <%=paper_input :height, f,"height", @item.height,"",true%>
+
+      
+                                        <%=paper_input :width, f,"width", @item.width,"",true%>
+
+      
+                                        <%=paper_input :thickness, f,"thickness", @item.thickness,"",true%>
+
+      
+                                  <%=f.datetime_select :aquisition_date %>
+
+                                        <%=paper_input :outer_circumference, f,"outer_circumference", @item.outer_circumference,"",true%>
+
+      
+                                        <%=paper_input :inner_circumference, f,"inner_circumference", @item.inner_circumference,"",true%>
+
+      
+                                        <%=paper_input :weight, f,"weight", @item.weight,"",true%>
+
+      
+                                        <%=paper_input :conservation_sate, f,"conservation_sate", @item.conservation_sate,"",true%>
+
+      
+                                        <%=paper_input :biography, f,"biography", @item.biography,"",true%>
+
+      
+                                        <%=paper_input :description, f,"description", @item.description,"",true%>
+
+      
+                    <% end %>
+
+<%=app_footer_page @item,items_path%>
+<%=app_botton_save items_path %>

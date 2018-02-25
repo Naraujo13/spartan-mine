@@ -1,0 +1,22 @@
+<%=app_header_page%>
+  
+
+    <%= form_for(@system_bug_message) do |f| %>
+       
+       <%=paper_textarea_show t("bug_problem"), System::Bug.find(@system_bug_message.system_bug_id).problem, "bug_report"%>
+
+        <div class="row">
+            <div class="col s6">
+                <%if @system_bug_message.admin_id == nil%>
+                 <%=t"bug_you_at"%> <%=@system_bug_message.created_at.strftime("%d/%m/%Y %H:%M")%>
+               <%else%>
+                 <%=User.find(@system_bug_message.admin_id).first_name%> <%=t"bug_at"%> <%=mensagem.created_at.strftime("%d/%m/%Y %H:%M")%>
+               <%end%>
+            </div>
+        </div>
+       <%=paper_input t("bug_status_description"), f,"message",system_bug_message.message,"forum"%>
+    
+
+    <% end %>
+<%=app_footer_page @category_program, system_bug_statuses_path%>
+<%=app_botton_save system_bug_statuses_path %>

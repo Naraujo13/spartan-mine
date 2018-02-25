@@ -1,0 +1,19 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+			<%=list_header @collections, collections_path%>
+
+
+					<% @collections.each do |collection| %>
+
+						<%=collection_list_item collection.id, collection.name, collection.museum_id, edit_collection_path(collection),"palette",true%>
+
+					<% end %>
+
+			<%=list_footer %>
+
+		<%= app_footer_page @collections, collections_path, @total%>
+
+<%= app_footer%>
+<%= app_botton_add new_collection_path %>

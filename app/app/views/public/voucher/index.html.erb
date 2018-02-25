@@ -1,0 +1,135 @@
+<style type="text/css">
+	p{
+		margin: 0px 40px 0px 20px;
+	}
+	*{
+		font-family: Roboto;
+	}
+	body{
+		font-size: 20px;
+		font-weight: 100;
+	}
+	#controllers{
+		visibility: hidden;
+	}
+</style>
+
+<div id='div_home' class='row' style="margin-botton:0px">
+    <div class='col s5' style="background-image: url(/assets/system/voucher_background.jpg);
+    background-size: cover;">
+        <div id='div_image' style="text-align:center">
+            <h4 style="margin: 60px 0px 0px 0px;color:white;font-size: 48px;font-weight:200 !important">
+                <%=t'voucher_welcome_in_clube'%>
+            </h4>
+            <object id='svg_voucher' data='/assets/programs/voucher/voucher.svg' style="margin:20px 20px;margin-top:30px"></object>
+            <p style="margin:0px 30px 0px 30px;font-size:18px;color:white;font-weight:200;text-align:justify !important">
+                <%=t'voucher_welcome_in_clube_info'%>
+            </p>
+        </div>
+    </div>
+    <div id='div_creator' class='col s7' style="margin-top: 15px;">
+        <div class='z-depth-4' style='padding: 15px 15px;'>
+                <div class='row' style="align-items: center;display: flex;">
+                    <i class="material-icons medium">account_circle</i>
+                    <h4 class='flex' style='margin:0px;color:#404040;font-weight:200 !important'>Crie sua conta</h4>
+                </div>
+                <%= form_for(@user) do |f| %>
+                  <div class='row'>
+                    <div class="col s6">
+                      <%=paper_input t("account_your_name"), f,"first_name", @user["first_name"], "person"%>
+                    </div>
+                    <div class="col s6">
+                      <%=paper_input t("account_last_name"), f,"last_name", @user["last_name"],""%>
+                    </div>
+                  </div>
+                  <%=paper_input "Email", f,"email", @user["email"],"email"%>
+                  <input name='user[email]' value='<%=@user["email"]%>' type='hidden'/>
+                  <input name='voucher' value='<%=@voucher.voucher%>' type='hidden'/>
+                  <%=paper_hidden f,"access_token",SecureRandom.hex(4)%>
+                  <div class='horizontal layout center'>
+                    <div class="flex">
+                      <%=paper_input_phone t("account_phone"),f,"phone_number",@user["phone_number"]%>
+                    </div>
+                  </div>
+                  <div class='horizontal layout end' style="margin-bottom: 10px;">
+                    <div class="flex">
+                      <%=paper_input t("account_password"), f,"password","","lock",false,"password"%>
+                    </div>
+                    <div class="flex">
+                      <%=paper_input t("account_password_confirmation"), f,"user_password_confirmation","","lock_outline",false,"password"%>
+                    </div>
+                  </div>
+                  <div class="row" style="text-align: right;">
+                      <a id='save' class="waves-effect waves-light btn"><%=t('voucher_create_account')%></a>
+                 </div>
+              <% end %>
+            </div>
+    </div>
+</div>
+<%if not @allowed%>
+    <div id="voucher_message" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4><%=t'app_dialg_attention'%></h4>
+            <p><%=@messenge.html_safe%></p>
+        </div>
+        <div class="modal-footer">
+            <%if @voucher.id != nil%>
+                <%if @voucher.voucher_used%>
+                    <a href="#" onclick="location.href='/'" class="modal-action modal-close waves-effect waves-green btn-flat"><%=t"app_understood"%></a>
+                <%else%>
+                    <a href="#" onclick="location.href='/voucher/?id=<%=@voucher.voucher%>'" class="modal-action modal-close waves-effect waves-green btn-flat"><%=t"app_understood"%></a>
+                <%end%>
+            <%else%>
+                <%if @redirect%>
+                    <a href="#" onclick="location.href='/'" class="modal-action modal-close waves-effect waves-green btn-flat"><%=t"app_understood"%></a>
+                <%else%>
+                    <a href="#" onclick="location.href='/users/sign_in'" class="modal-action modal-close waves-effect waves-green btn-flat"><%=t"app_understood"%></a>
+                <%end%>
+            <%end%>
+            
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#voucher_message').modal('open')
+        })
+    </script>
+<%end%>
+<script>
+    
+    if($("#save")[0] != undefined ){
+        $("#save")[0].onclick = function save() {
+            $(document.querySelector("form")).submit();
+        };
+        document.querySelector('form').action = "/public/voucher"
+    }
+	
+    $(document).ready(function(){
+        <%
+            voucher = System::Voucher.where(voucher: params[:id]).first
+            if voucher != nil
+                pricing = voucher.pricing
+                if pricing == "" or pricing == nil
+                    pricing = '0,00'
+                end
+            else
+                pricing = '0,00'
+            end
+        %>
+        //height = $('body').height() - 64;
+        height = $('#div_creator').height();
+        document.querySelector('#div_home').style.height = height+"px";
+        document.querySelector('#div_image').style.height = height-40+"px";
+        document.querySelector('#svg_voucher').addEventListener('load',function(e){
+            document.querySelector('#svg_voucher').contentDocument.querySelector('#valor').innerHTML = "<%=pricing%>"
+            document.querySelector('#svg_voucher').contentDocument.querySelector('#number').innerHTML = " <%=params[:id]%>"
+        })
+        
+        <%if @user[:email] != nil%>
+            document.querySelector('#user_email').disabled = true;
+        <%end%>
+    
+       // document.querySelector('#div_image').style.minHeight = ($(document).height()-64)+"px";
+        
+    });
+</script>

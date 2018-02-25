@@ -1,0 +1,40 @@
+<%if not defined? usedByHelpSystem %>
+    <div id='help_tip'>
+        <div class="horizontal-reverse layout system_color_background">
+            <paper-icon-button onclick='close_tip()' icon="close" style='color:white'></paper-icon-button>
+        </div>
+        <div class="horizontal layout center-justified system_color_background" style="height:300px;width:100%;background-image: url(/assets/programs/help/background.png); background-size: contain; background-repeat: no-repeat;">
+            <div class="vertical layout center" style="color:white">
+                <h1 style='font-size: -webkit-xxx-large;'><b>Central de Ajuda</b></h1>
+                <p style="font-weight: 100 !important; font-family: 'Roboto Thin' !important;">Olá <%if current_user != nil%><%=current_user.first_name%><%end%> dexe-nos ver como nós podemos te ajudar</p>
+                <input-search class="searcher"></input-search>
+            </div>
+        </div>
+    </div>
+<style>
+  .searcher {
+    border: 0;
+    background: white;
+    color: gray;
+    border-radius: 22px;
+    padding: 0 8px;
+    min-width: 400px
+  }
+</style>
+<script>
+    $(document).ready(function(){
+       $('#help_searcher_main').css('display','none');
+       $('#mainContainer div').removeClass('content');
+    });
+    function close_tip(){
+        $('#help_tip').hide();
+        $('#mainContainer div').addClass('content');
+        $('#help_searcher_main').css('display','');
+    }
+</script>
+<%end%>
+<div class="horizontal layout center">
+    <div class='flex'>
+        
+    </div>
+</div>

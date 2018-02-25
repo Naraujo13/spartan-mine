@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @system_access_to.user %>
+</p>
+
+<p>
+  <strong>Program:</strong>
+  <%= @system_access_to.program %>
+</p>
+
+<%= link_to 'Edit', edit_system_access_to_path(@system_access_to) %> |
+<%= link_to 'Back', system_access_tos_path %>

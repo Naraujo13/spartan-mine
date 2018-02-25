@@ -1,0 +1,5 @@
+<p><%=t"mailer_hello"%> <%= @email %>!</p>
+
+<p><%=t"mailer_you_can"%></p>
+
+<p><%= link_to 'Confirmar minha conta', confirmation_url(@resource, confirmation_token: @token) %></p>

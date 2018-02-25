@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @system_help.name %>
+</p>
+
+<p>
+  <strong>Sort description:</strong>
+  <%= @system_help.sort_description %>
+</p>
+
+<p>
+  <strong>Like:</strong>
+  <%= @system_help.like %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @system_help.type %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @system_help.post %>
+</p>
+
+<p>
+  <strong>Viewed:</strong>
+  <%= @system_help.viewed %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @system_help.link %>
+</p>
+
+<p>
+  <strong>Featured:</strong>
+  <%= @system_help.featured %>
+</p>
+
+<%= link_to 'Edit', edit_system_help_path(@system_help) %> |
+<%= link_to 'Back', system_helps_path %>

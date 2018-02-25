@@ -1,0 +1,30 @@
+<%=app_header_page%>
+    <%= form_for(@system_voucher) do |f| %>
+        
+        <div class='row'>
+            <div class='col s4'>
+                <%if @system_voucher.persisted? %>
+                    <%=paper_input t("voucher"), f,"voucher",@system_voucher.voucher,"card_giftcard"%>
+                <%else%>
+                    <%=paper_input t("voucher"), f,"voucher",SecureRandom.hex,"card_giftcard"%>
+                <%end%>
+            </div>
+            <div class='col s4'>
+                <%=paper_date_select t("voucher_dt_expire"),f,f.object.dt_expire,:dt_expire,"dt_expire","today",nil,true%>
+            </div>
+            <div class='col s4'>
+                <%=paper_input_money t("voucher_pricing"), f,"pricing",@system_voucher.pricing%>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col s6'>
+                <%=paper_input t("voucher_first_name"), f,"first_name",@system_voucher.first_name,"account_circle"%>
+            </div>
+            <div class='col s6'>
+                <%=paper_input t("voucher_email"), f,"email",@system_voucher.email,"email"%>
+            </div>
+        </div>
+
+    <% end %>
+<%=app_footer_page @system_voucher, system_vouchers_path%>
+<%=app_botton_save system_vouchers_path %>

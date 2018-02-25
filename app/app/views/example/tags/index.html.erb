@@ -1,0 +1,115 @@
+<%= app_header ['Tab','Tab example 1','Tab example 2']%>
+
+	<%=app_header_page%>
+
+        <%=list_header @example_tags, example_tags_path%>
+
+            <% @example_tags.each do |example_tag| %>
+                
+                <%
+                    elements = []
+                    element = {}
+                    element[:id] = example_tag.id
+                    element[:icon] = 'chat'
+                    element[:method] = "alert('O id é "+example_tag.id.to_s+"')"
+                    element[:tooltip] = "O id da tag "+example_tag.title
+                    elements << element
+                %>
+
+                <%=list_item example_tag.id,example_tag.title,example_tag.updated_at, edit_example_tag_path(example_tag),"chat",true,elements%>
+        
+            <% end %>
+
+        <%=list_footer %>
+        
+	<%=app_footer_page @example_tags, example_tags_path, @total%>
+
+    <%=app_header_page 1%>
+
+        <div>
+            <h3>Tab example 1</h3>
+        </div>
+        
+	<%=app_footer_page @example_tags, example_tags_path,@total%>
+
+    <%=app_header_page 2%>
+
+        <div>
+            <h3>Tab example 2</h3>
+        </div>
+        
+	<%=app_footer_page @example_tags, example_tags_path,@total%>
+<%=app_footer%>
+<%=app_botton_add new_example_tag_path%>
+<script>
+ 	function printReport(type){
+		printCallback('/example/tags/report','atHome Tags','reports/athome_tags',type)
+	}
+	$(document).ready(function(){
+        if(<%=@example_tags.length%> == 0){
+			<%if cookies[:tooltip_empty_tag_exemple] == nil%>
+	           <%cookies[:tooltip_empty_tag_exemple] = false %>
+				tooltip = Array();
+                tooltip[0] = Object();
+                tooltip[0]['title'] = '<%=t"tooltip_title_step_5"%>';
+                tooltip[0]['description'] = '<%=t"tooltip_description_5"%>';
+                tooltip[0]['element'] = 'a.btn-floating';
+                tooltip[0]['position'] = 'right';
+				tooltip[0]['top'] = -90;
+				tooltip[0]['left'] = -30;
+				tooltip[0]['pin_top'] = 70;
+				setTooltip(tooltip);
+				openTooltip();
+				setExecutationOnCloseTooltip("location.href='/example/tags/new'");
+	    <%end%>
+		}else{
+			<%if @example_tags.length != 0 and cookies[:tooltip_tag_many_exemple] == nil%>
+	           <%cookies[:tooltip_tag_many_exemple] = false %>
+                    tooltip = Array();
+                    tooltip[0] = Object();
+                    tooltip[0]['title'] = '<%=t"tooltip_title_step_6"%>';
+                    tooltip[0]['description'] = '<%=t"tooltip_description_6"%>';
+                    tooltip[0]['element'] = '#collection_0 .collection-item';
+                    tooltip[0]['position'] = 'top';
+                    tooltip[0]['top'] = 0;
+                    tooltip[0]['left'] = 0;
+                    tooltip[0]['pin_top'] = 0;
+                    tooltip[1] = Object();
+                    tooltip[1]['title'] = '<%=t"tooltip_title_step_7"%>';
+                    tooltip[1]['description'] = '<%=t"tooltip_description_7"%>';
+                    tooltip[1]['element'] = '#collection_0 .collection-item div p';
+                    tooltip[1]['position'] = 'top';
+                    tooltip[1]['top'] = 0;
+                    tooltip[1]['left'] = 0;
+                    tooltip[1]['pin_top'] = 0;
+                    tooltip[2] = Object();
+                    tooltip[2]['title'] = '<%=t"tooltip_title_step_8"%>';
+                    tooltip[2]['description'] = '<%=t"tooltip_description_8"%>';
+                    tooltip[2]['element'] = '#collection_0 .secondary-content';
+                    tooltip[2]['position'] = 'top';
+                    tooltip[2]['top'] = 0;
+                    tooltip[2]['left'] = 0;
+                    tooltip[2]['pin_top'] = 0;
+                    tooltip[3] = Object();
+                    tooltip[3]['title'] = '<%=t"tooltip_title_step_9"%>';
+                    tooltip[3]['description'] = '<%=t"tooltip_description_9"%>';
+                    tooltip[3]['element'] = '#collection_0 .secondary-content';
+                    tooltip[3]['position'] = 'right';
+                    tooltip[3]['top'] = -30;
+                    tooltip[3]['left'] = -10;
+                    tooltip[4] = Object();
+                    tooltip[4]['title'] = '<%=t"tooltip_title_step_10"%>';
+                    tooltip[4]['description'] = '<%=t"tooltip_description_10"%>';
+                    tooltip[4]['element'] = 'input[search]';
+                    tooltip[4]['position'] = 'top';
+                    tooltip[4]['top'] = 0;
+                    tooltip[4]['left'] = 0;
+                    tooltip[4]['pin_left'] = 206;
+                    setExecutationOnCloseTooltip("location.href='/'");
+                    setTooltip(tooltip);
+                    openTooltip();
+	    <%end%>
+		}
+
+	});
+</script>

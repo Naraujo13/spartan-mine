@@ -1,0 +1,11 @@
+<%= @page_index = params[:tab]%>
+
+$('#collection_<%=params[:tab]%>').html('')
+
+  <% @items.each do | item | %>
+
+     $('#collection_<%=params[:tab]%>').append(`<%=list_item item.id, item.item_id,item.updated_at, edit_item_path(item),"chat",true%>`);
+
+     <% end %>
+
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@items, :remote => true).to_s) %>');

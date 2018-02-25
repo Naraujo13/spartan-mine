@@ -1,0 +1,20 @@
+<div style='padding: 1px 10px;margin: 10px 15px 10px 25px;' class='z-depth-2'>
+	<div class='row'  style='align-items: center;' >
+		<div class='col s4' style='text-align: center;'>
+			<img width="300px" height="auto" src="/assets/system/denied.jpg" style="margin:20px">
+		</div>
+		<div class='col s8' style='text-align: left;'>
+			<h4 style="margin-top:40px"><%=t"forbidden_your_dont_have_access"%></h4>
+			<p style="font-family:Roboto">
+				<%=t"forbidden_contact_admi"%>
+			</p>
+			<h4 style="margin-top:40px"><%=t"forbidden_why_access_was"%></h4>
+			<p style="font-family:Roboto">
+				<%=t"forbidden_why_access_was_info"%>
+			</p>
+			<p class='row' style="margin: 60px 20px 20px 0px">
+                <a class="waves-effect waves-light btn-large" onclick="try{ga('send', 'event', 'atHome', 'forbiddenBackDashboard')}catch(exception){};location.href='/'" class='system_color'><i class="material-icons left">arrow_back</i><%=t"forbidden_back_to_dashboard"%></a>
+			</p>
+		</div>
+	</div>
+</div>

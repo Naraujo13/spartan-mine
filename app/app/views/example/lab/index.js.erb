@@ -1,0 +1,10 @@
+$('paper-a').html('')
+<%
+ @tags.each do |registro|
+  %>
+    $('paper-a').append("<%=app_list_item_js registro.id,registro.title,registro.updated_at, example_tag_path(registro),edit_example_tag_path(registro),'communication:chat'%>");
+  <%
+ end
+%>
+$('#paginator').html('<%=escape_javascript(paginate(@tags, :remote => true).to_s) %>');
+refreshRepresentation();

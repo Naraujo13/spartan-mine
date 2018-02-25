@@ -1,0 +1,38 @@
+<%=app_header_page%>
+
+      <%= form_for(@item) do |f| %>
+
+            <%=paper_input "Código do Item", f,"item_id", @item.item_id, "assignment" %>
+
+            <%=paper_input "Nome", f,"name", @item.name, "edit" %>
+
+            <%=paper_select "Coleção", f, "collection_id", "collection_id", @item.collection_id, Collection.all, "id", "name", "assignment_ind" %> 
+            
+            <% paper_date_select "Ano de Fabricação", f, @item.year, "year", "year" %>
+
+            <% paper_date_select "Data de Aquisição", f, @item.aquisition_date, "aquisition_date", "aquisition_date" %>
+
+            <%=paper_input "Altura", f,"height", @item.height %>
+
+            <%=paper_input "Comprimento", f,"lenght", @item.lenght %>
+
+            <%=paper_input "Largura", f,"width", @item.width %>
+            
+            <%=paper_input "Espessura", f,"thickness", @item.thickness %>            
+            
+            <%=paper_input "Circunferência Externa", f,"outer_circumference", @item.outer_circumference %>
+            
+            <%=paper_input "Circunferência Interna", f,"inner_circumference", @item.inner_circumference %>
+
+            <%=paper_input "Peso", f,"weight", @item.weight %>
+
+            <%=paper_input "Estado de Conservação", f,"conservation_state", @item.conservation_state %>
+
+            <%=paper_input "Biografia", f,"biography", @item.biography %>
+
+            <%=paper_input "Descrição", f,"description", @item.description %>
+
+      <% end %>
+
+<%=app_footer_page @item,items_path%>
+<%=app_botton_save items_path %>

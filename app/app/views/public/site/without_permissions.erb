@@ -1,0 +1,27 @@
+<div style='padding: 1px 10px;margin: 10px 15px 10px 25px;' class='z-depth-2'>
+	<div class='row'  style='align-items: center;' >
+		<div class='col s4' style='text-align: center;'>
+			<img width="300px" height="auto" src="/assets/system/without_permissions.jpg" style="margin:20px">
+		</div>
+		<div class='col s8' style='text-align: left;'>
+			<div class="row">
+                <h4 style="margin-top:40px"><%=t"permissions_your_dont_have_access"%></h4>
+                <p style="font-family:Roboto">
+                    <%=t"permissions_contact_admi"%>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col s5">
+                    <a class="waves-effect waves-light btn-large" onclick="try{ga('send', 'event', 'atHome', 'forbiddenBackDashboard')}catch(exception){};location.href='mailto:<%=System::Config.first.email_user%>';" class='system_color'><i class="material-icons left">email</i><%=t"permissions_email"%></a>
+                </div>
+                <div class="col s7">
+                    <h5><%=t"forbidden_why_access_was"%></h5>
+                    <p style="font-family:Roboto">
+                        <%=t"permissions_why_access_was_info"%>
+                    </p>
+                </div>
+            </div>
+		</div>
+	</div>
+        
+</div>

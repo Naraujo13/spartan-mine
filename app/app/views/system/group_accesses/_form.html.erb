@@ -1,0 +1,18 @@
+<%=app_header_page%>
+    <%= form_for(@system_group_access) do |f| %>
+
+        <%=paper_input t("group_accesses_name"), f,"name",@system_group_access.name,"group"%>
+
+        <%=paper_input t("group_accesses_description"), f,"description",@system_group_access.description,"insert_comment"%>
+
+        <%=paper_checkbox t("group_accesses_active"), f, :active, f.object.active, "active","visibility"%>
+
+        <%if @system_group_access.persisted?%>
+          <%=paper_relation_nn t("group_accesses_programs"), 'system_group_access_program', 'system_group_accesses_id', @system_group_access.id,  '/system/group_access_programs/list/', '/system/programs/getSearch', '/system/group_access_programs/insert', '/system/group_access_programs/', 'system_programs_id','name', "apps"%>
+        <%end%>
+
+
+    <% end %>
+
+<%=app_footer_page @system_group_access, system_group_accesses_path%>
+<%=app_botton_save system_group_accesses_path %>

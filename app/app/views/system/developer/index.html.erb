@@ -1,0 +1,50 @@
+<%= app_header "Files"%>
+
+	<%=app_header_page %>
+
+    <div class="horizontal layout center">
+      <div class='flex'>
+        <img style='height:auto;width:250px;' src='/assets/logo/email.png'>
+      </div>
+      <div class='flex-2' style="margin:20px 0px">
+        <div class='vertical justified layout'>
+          <div><h3>Git</h3></div>
+					<div style="margin-left:16px">
+						<b><%=t"developer_git_version"%>:</b> <%= %x{ git rev-parse HEAD } %>
+					</div>
+					<div style="margin-left:16px">
+						<b><%=t"developer_git_label"%>:</b> <%= %x{ git log -1 --pretty=%B } %>
+					</div>
+
+          <div><h3><%=t"developer_ambient"%></h3></div>
+					<div style="margin-left:16px">
+						<b>Rails:</b> <%=Rails.env %>
+					</div>
+					<div style="margin-left:16px">
+						<b><%=t"developer_database"%>:</b> <%= Rails.configuration.database_configuration[Rails.env]['database']%>
+					</div>
+					<div style="margin-left:16px">
+						<b>URL:</b> <%=request.domain %>
+					</div>
+
+          <div><h3><%=t"develeper_ssession"%></h3></div>
+					<div style="margin-left:16px">
+						<b><%=t"developer_user_last"%>:</b> <%=current_user.current_sign_in_at %>
+					</div>
+					<div style="margin-left:16px">
+						<b><%=t"developer_user_number"%>:</b> <%=current_user.sign_in_count %>
+					</div>
+					<div style="margin-left:16px">
+						<b><%=t"developer_user_ip"%>:</b> <%=current_user.current_sign_in_ip%>
+					</div>
+
+          <div><h3><%=t"developer_so"%></h3></div>
+          <div style="margin-left:16px">
+						<b><%=t"developer_so_information"%>:</b> <%= %x{ uname -a } %>
+					</div>
+				</div>
+      </div>
+    </div>
+
+	<%= app_footer_page [1], ""%>
+<%=app_footer%>

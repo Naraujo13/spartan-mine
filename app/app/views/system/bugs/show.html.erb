@@ -1,0 +1,32 @@
+<%= app_header_show%>
+
+	<%=app_header_page_show notice%>
+
+
+
+		<%=paper_textarea_show "Problema", @system_bug.problem, "bug-report"%>
+
+		<%data = @system_bug.created_at.to_s.split(" ")
+		  hora = data[1]
+		  data = data[0].split("-")
+		  day  = data[2]
+		  month= data[1]
+		  year = data[0]
+
+		%>
+		<%=paper_input_show "Criado em"," #{day}/#{month}/#{year} às #{hora}", "alarm"%>
+
+		<%=paper_select_show "Status",@system_bug.bug_status_id,System::BugStatus.order("description"), "id","description","notification:adb"%>
+
+	<%=app_footer_page_show system_bugs_path, edit_system_bug_path(@system_bug)%>
+
+<%=app_footer_show %>
+<paper-dialog modal <%if @system_bug.created_at != nil && (not current_user.admin)%> opened <%end%> >
+	<h2>Informação</h2>
+	<paper-dialog-scrollable style="min-height: 40px;">
+		<p>Ao reportar uma dúvida ou problema, aguarde que nossos gerentes, eles retornarão em um prazo máximo de <b>24 horas</b> pelo próprio sistema.</p>
+	</paper-dialog-scrollable>
+	<div class="buttons">
+		<paper-button dialog-confirm><%=t'app_understood'%></paper-button>
+	</div>
+</paper-dialog>

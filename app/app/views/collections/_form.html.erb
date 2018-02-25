@@ -1,0 +1,14 @@
+<%=app_header_page%>
+
+    <%= form_for(@collection) do |f| %>
+
+      <%=paper_input "Código da Coleção", f,"collection_id", @collection.collection_id, "assignment" %>
+
+      <%=paper_select "Museu", f, "museum_id", "museum_id", @collection.museum_id, Museum.all, "id", "name" %> 
+      
+      <%=paper_input "Nome", f, "name", @collection.name, "edit" %>
+
+    <% end %>
+
+<%=app_footer_page @collection, collections_path%>
+<%=app_botton_save collections_path %>

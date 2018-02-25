@@ -1,0 +1,63 @@
+<section id="home">
+  <iron-collapse opened>
+    <div class='horizontal layout center' style="margin: 40px 20px;text-align: center;">
+      <div class='flex'>
+        <paper-card heading="Sistema Integrado" image="/assets/programs/help/ideia.png">
+          <div class="card-content">
+              <%=t"help_what"%>
+          </div>
+          <div class="card-actions">
+            <paper-button><%=t"app_read_more"%></paper-button>
+          </div>
+        </paper-card>
+      </div>
+
+      <div class='flex'>
+        <paper-card heading="Ajuda Direta"  image="/assets/programs/help/farol.png">
+          <div class="card-content">
+            <%=t"help_we_all_time_ready"%>
+          </div>
+          <div class="card-actions">
+            <paper-button><%=t"help_by_phone"%></paper-button>
+            <paper-button><%=t"help_by_email"%></paper-button>
+          </div>
+        </paper-card>
+      </div>
+      <div class='flex'>
+        <paper-card heading="Colabore!"  image="/assets/programs/help/man_to_up.png">
+          <div class="card-content">
+            Aproveite para ajudar a melhorar nossa central de ajudar a ter mais módulos de ajuda para os iniciantes do sistema.
+          </div>
+          <div class="card-actions">
+            <paper-button><%=t"app_read_more"%></paper-button>
+          </div>
+        </paper-card>
+      </div>
+    </div>
+  </iron-collapse>
+</section>
+
+
+<%=helper_header "apis","API","Programa de Acesso a API"%>
+
+		<%=helper_action "O que é a chave?","Chave é uma string que funciona como entrada para o sistema, ela é redirecionada para cada método que necessita de autenticação na API"%>
+
+<%=helper_footer%>
+
+<%=helper_header "agendas","Agenda","Aplicação de cadastro de eventos"%>
+
+		<%=helper_action "O que é evento?","Evento é o cada um dos eventos que haverá no calendário acadêmico da UFPel"%>
+
+		<%=helper_action "O que é Agenda?","Agenda é o conjunto de todos os eventos da UFPel"%>
+
+		<%=helper_action "O que é Sincronizável?","Se este campo está ativo então ele pode ser sincronizado com o smartphone do usuário."%>
+
+<%=helper_footer%>
+
+<%=helper_header "exemplo","Nome","Resumo"%>
+
+		<%=helper_action "Ajuda 1?","Descrição Ajuda 1"%>
+
+<%=helper_footer%>
+
+<%=render :file => "app/views/public/help/index.html.erb", :locals => {:usedByHelpSystem => "yes"}%>

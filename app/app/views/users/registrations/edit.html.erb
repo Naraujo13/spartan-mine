@@ -1,0 +1,185 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form-horizontal", html: { method: :put }) do |f| %>
+            <div class='row'>
+                <div class='col m8 l8 offset-l4 offset-m4 s12' style="text-align: center;">
+                    <%if not current_user.avatar.to_s.include? "/"%>
+                        <img sizing="contain" src='/assets/system/account_avatar_m.png' style='border-radius: 50%; margin-top: 10px; width: 170px; height: 170px;'>
+                    <%else%>
+                        <% avatar = f.object.avatar.url
+                           avatar = avatar.sub!("public/", "")%>
+                        <img sizing="contain" src='<%=avatar%>' style='border-radius: 50%; margin-top: 10px; width:170px; height: 170px;'>
+                    <%end%>
+                </div>
+            </div>
+            <div class='row'>
+                <div class="col m8 l8 offset-l4 offset-m4 s12" style="text-align: center;">
+                    <%= f.file_field :avatar, multiple: false, :style => "margin-left: 68px; margin-top: 5px;" %>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col s12 m12 l4'>
+                    <h4>Informações Pessoais</h4>
+                    <p>Aqui você encontra informações sobre sua conta. Modifique seu nome, email, data de nascimento e outras informações básicas sobre você.</p>
+                    <div class='row'>
+                        <a class="waves-effect waves-light btn red darken-1" onclick="$('#notification_email').modal('open')"><i class="material-icons left">remove_circle</i><%=t"user_registration_cancel_my_account"%></a>
+                    </div>
+                </div>
+                <div class='col s8'>
+                    <div class="row">
+                        <div class="col l6 m6 s12">
+                            <%=paper_input t("account_your_name"), f,"first_name",@user.first_name,"person"%>
+                        </div>
+                        <div class="col l6 m6 s12">
+                            <%=paper_input t("account_last_name"), f,"last_name",@user.last_name,""%>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="col l6 m6 s12">
+                            <%=paper_input 'Email', f,"email",@user.email,"email"%>
+                        </div>
+                        <div class="col l6 m6 s12">
+                            <%=paper_input_phone t("account_phone"),f,"phone_number",f.object.phone_number%>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class="col l6 m6 s12">
+                            <%=paper_date_select t("account_birth"),f,f.object.born,:born,"born","cake",nil,true%>
+                        </div>
+                        <div class="col l6 m6 s12">
+                            <%=paper_select t("post_category")  , f, f.object.gender ,"gender" , :gender, [{"id" => "m","description"=>"Masculino"},{"id" => "f","description"=>"Feminino"},{"id" => "d","description"=>"Desconhecido"}],"id","description","turned_in"%>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col s12'>
+                            <%=paper_checkbox t("account_admin"),f,:admin,f.object.admin, "set_admin_admin","supervisor_account",false%>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='col l6 m6 s12'>
+                            <%=paper_input t("user_registration_atual_password"), f,"current_password",@user.current_password,"lock",false,"password"%>
+                        </div>
+                        <div class='col l6 m6 s12'>
+                            <%=paper_input "Token", f,"access_token",@user.access_token,"vpn_key",false%>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col l6 m6 s12">
+                            <%=paper_input t("user_registration_new_password"), f,"password",@user.password,"lock_open",false,"password"%>
+                        </div>
+                        <div class="col l6 m6 s12">
+                            <%=paper_input t("user_registration_new_password_conf"), f,"password_confirmation",@user.password_confirmation,"",false,"password"%>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class='row'>
+                <div class="col l8 offset-l4 m8 offset-m4 s12">
+                    <div class="row">
+                        <a style='margin-left: 30px;' class="waves-effect waves-light btn" onclick="$('form').submit()"><i class="material-icons left">save</i><%=t"user_registration_update_account"%></a>
+                    </div>
+                </div>
+            </div>
+            <div id='notification_email' class="modal">
+                <div class="modal-content">
+                    <h4 style='font-family:Roboto;font-weight:100'>
+                        <%=t"user_registration_close"%>
+                    </h4>
+                    <p>
+                        <%=t"user_registration_close_info"%>
+                    </p>
+                    <p>
+                        <i class="material-icons">done</i><%=t"user_registration_you_access"%> <b><%=current_user.sign_in_count%> <%=t"user_registration_your_system"%></b>
+                    </p>
+                    <p>
+                        <i class="material-icons">done</i><%=t"user_registration_will"%><b>
+                        <%=System::AccessTo.where("user_id = #{current_user.id}").count%></b>
+                        <%=t"user_registration_programs"%>
+                    </p>
+                    <p style='margin-top:40px'>
+                        <%=t"user_registration_i_understand"%>
+                    </p>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <input id="name" type="text" class="validate">
+                          <label for="name"><%=current_user.first_name+' '+current_user.last_name%></label>
+                        </div>
+                    </div>
+                    <p style="margin-top: -20px;">
+                        <input type="checkbox" id="termo" />
+                        <label for="termo"><%=t"user_registration_please_forget_me"%></label>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi</a>
+                    <a href="#!" style='color: white;' class="modal-action modal-close waves-effect waves-green btn-flat red"  onclick='accountExclude()'>Remover conta</a>
+                </div>
+            </div>
+
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div id='notification_email' class="modal bottom-sheet">
+                    <div class="modal-content">
+                        <h4>Atenção</h4>
+                        Esperando confirmação para:
+                        <%= resource.unconfirmed_email %>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi</a>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('#notification_email').modal('open');
+                    })
+                </script>
+              <% end %>
+        <%end%>
+
+
+	<%=app_footer_page @users, 'accounts/new', @total%>
+
+<%=app_footer%>
+
+<script>
+  function accountExclude(){
+    console.log('account')
+    if(document.querySelector('#termo').checked){
+      if(document.querySelector('#name').value.toLowerCase() == "<%=current_user.first_name+' '+current_user.last_name%>".toLowerCase()){
+        $.ajax({
+          type: 'POST',
+          url: '/accounts/<%=current_user.id%>',
+          dataType: 'json',
+          data: {'_method':'delete'},
+          beforeSend:function(){
+            loader(true)
+          },
+          sucess: function(e){
+              dialogOpen('<%=t"app_account_exclude_success"%>','<%=t"app_account_exclude_success_msg"%>','<%=t"app_understood"%>','','signOut()')
+          },error: function(e){
+              dialogOpen('<%=t"app_account_exclude_error"%>','<%=t"app_account_exclude_error_msg"%>','<%=t"app_understood"%>','')
+          },complete(xhr){
+           loader(false);
+            if(xhr.status >= 200 && xhr.status < 300){
+              dialogOpen('<%=t"app_account_exclude_success"%>','<%=t"app_account_exclude_success_msg"%>','<%=t"app_understood"%>','','signOut()')
+            }else{
+              dialogOpen('<%=t"app_account_exclude_error"%>','<%=t"app_account_exclude_error_msg"%>','<%=t"app_understood"%>','')
+            }
+          }
+        });
+      }else{
+        dialogOpen('<%=t"user_registration_complete_name"%>','<%=t"user_registration_complete_info"%>','<%=t"app_understood"%>','')
+      }
+    }else{
+      dialogOpen('<%=t"user_registration_term"%>','<%=t"user_registration_term_info"%>','<%=t"app_understood"%>','')
+    }
+  }
+  function signOut(){
+    location.href = '/users/sign_out';
+  }
+</script>

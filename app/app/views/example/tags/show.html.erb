@@ -1,0 +1,11 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+		<%=paper_input_show t("tag_name"), @example_tag.title, "apps"%>
+
+    <%=paper_checkbox_show t("tag_active"), @example_tag.active,"done" %>
+
+	<%= app_footer_page_show example_tags_path, edit_example_tag_path(@example_tag)%>
+
+<%= app_footer_show %>

@@ -1,0 +1,101 @@
+<%=app_header_page%>
+
+    <%= form_for(@system_config) do |f| %>
+
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_name_sort"), f,"name_sort",@system_config.name_sort,"account_balance"%>
+            </div>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_at_home_version_repository"), f, "at_home_version_repository", @system_config.at_home_version_repository, "code"%>
+            </div>
+        </div>
+
+        <h4>
+            <%=t'config_company'%>
+        </h4>
+
+        <%=paper_input t("config_name_company"), f,"name_company",@system_config.name_company,"location_city"%>
+
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_address_company"), f,"address_company",@system_config.address_company, "place"%>
+            </div>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_country_company"), f,"country_company",@system_config.country_company,"public"%>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_email_company"), f,"email_company",@system_config.email_company,"email"%>
+            </div>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_phone_company"), f,"phone_company",@system_config.phone_company,"phone"%>
+            </div>
+        </div>
+
+        <h4>
+            <%=t'config_privacy'%>
+        </h4>
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_terms_of_user_last_change"), f,"terms_of_user_last_change",@system_config.terms_of_user_last_change,"security"%>
+            </div>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_privacity_last_change"), f,"privacity_last_change",@system_config.privacity_last_change,"gavel"%>
+            </div>
+        </div>
+
+        <h4>
+            <%=t'config_email'%>
+        </h4>
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+            <%=paper_input t("config_email_to_send"), f,"email_user",@system_config.email_user,"email"%>
+            </div>
+            <div class='col s12 m6 l6'>
+            <%=paper_input t("config_email_password"), f, "email_password", @system_config.email_password, "lock_outline"%>
+            </div>
+        </div>
+
+        <h4>
+            <%=t'config_google'%>
+        </h4>
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_google_maps"), f,"google_maps_id",@system_config.google_maps_id,"map"%>
+            </div>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_google_analytics"), f,"google_analytics_id",@system_config.google_analytics_id,"timeline"%>
+            </div>
+        </div>
+
+        <h4>
+            <%=t'config_colors'%>
+        </h4>
+        <div class='row'>
+            <div class='col s12 m4 l4'>
+                <%=paper_color t('config_system_color'),f,"system_color",@system_config.system_color%>
+            </div>
+            <div class='col col s12 m4 l4'>
+                <%=paper_color t("config_system_color_disabled"), f,"system_color_disabled", @system_config.system_color_disabled%>
+            </div>
+            <div class='col col s12 m4 l4'>
+                <%=paper_color t("config_system_danger_color"), f,"system_danger_color", @system_config.system_danger_color%>
+            </div>
+        </div>
+
+        <h4>
+            <%=t'config_others'%>
+        </h4>
+        <div class='row'>
+            <div class='col s12 m6 l6'>
+                <%=paper_input t("config_country_code"), f, "country_code", @system_config.country_code, "dialpad"%>
+            </div>
+            <div class='flex'>
+            </div>
+        </div>
+
+    <% end %>
+<%=app_footer_page @system_program, system_programs_path%>
+<%=app_botton_save system_configs_path %>

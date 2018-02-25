@@ -1,0 +1,80 @@
+#tooltip_balloon{
+  width: 300px;
+  min-height: 70px;
+  border-radius: 4px;
+  background-color: #fbb03c;
+  position: fixed;
+  z-index: 9998;
+  display: none;
+  top:20px;
+  left: 40px;
+  /* border-color: white;
+  border-width: 1px;
+  border-style: solid; */
+  -webkit-animation: moveLeft 1s infinite; /* Chrome, Safari, Opera */
+  animation: moveLeft 1s infinite;
+}
+#tooltip_pin{
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  top:40px;
+  margin-left: -10px;
+  background-color: #fbb03c;
+  z-index: 9997;
+  /* border-color: white;
+  border-width: 1px;
+  border-style: solid; */
+  -webkit-animation: moveLeft 1s infinite; /* Chrome, Safari, Opera */
+  animation: moveLeft 1s infinite;
+}
+#tooltip_content{
+  padding: 20px 10px 0px 20px;
+}
+#tooltip_title{
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+}
+#tooltip_description{
+  padding-top: 10px;
+  color: white;
+  font-size: 12px;
+}
+#tooltip_buttons{
+  padding-left: 10px;
+  padding-top: 10px;
+}
+#tooltip_buttons a{
+    cursor: pointer;
+}
+paper-button{
+  color: white;
+  font-size: 12px;
+}
+paper-button[jump]{
+  font-size: 10px;
+  text-decoration: underline;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes moveLeft {
+    from,to { }
+    0% {left: 0px;}
+    80% {left: 10px;}
+    100% {left: 0px;}
+}
+@keyframes moveLeft {
+  from,to { }
+  0% {left: 0px;}
+  80% {left: 10px;}
+  100% {left: 0px;}
+}
+.btn-small {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}

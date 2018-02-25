@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title><%=t "title_short"%></title>
+      <link rel="icon" type="image/png" href="/assets/logo/small.png" />
+      <link rel="author" href="https://plus.google.com/+GlaucoRobertoMunsberg" />
+      <meta name="description" content="<%=t "title"%>">
+      <meta property="og:title" content="<%=t "title_short"%>" />
+      <meta property="og:type" content="article" />
+      <meta property="og:image" content="/assets/logo/full.png" />
+      <meta property="og:url" content="<%=root_url%>" />
+      <meta property="fb:admins" content="100000197237018" />
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:url" content="<%=root_url%>">
+      <meta name="twitter:image" content="/assets/logo/full.png">
+      <meta name="twitter:description" content="<%=t "title_short"%>">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <%= html_import_tag "application" %>
+      <%= stylesheet_link_tag    'outside', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'outside', 'data-turbolinks-track' => true %>
+      <script async type="text/javascript" src="https://www.google.com/jsapi"></script>
+  </head>
+  <body unresolved style="margin:0px">
+    <style is="custom-style">
+        paper-scroll-header-panel {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: var(--paper-grey-200, #eee);
+          /* background for toolbar when it is at its full size */
+          --paper-scroll-header-panel-full-header: {
+            background-image: url(assets/programs/help/bg2.jpg);
+          };
+          /* background for toolbar when it is condensed */
+          --paper-scroll-header-panel-condensed-header: {
+            background-color: transparent;
+          };
+        }
+        paper-toolbar {
+          background-color: transparent;
+        }
+        .search-box {
+          background-color: #fff;
+          border: 1px solid #eee;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+          height: 40px;
+        }
+        .search-box iron-icon {
+          color: var(--google-grey-700);
+          fill: var(--google-grey-700);
+          margin: 0 8px;
+        }
+
+        .search-box input {
+          font-size: 20px;
+          outline: 0;
+          border: none;
+          margin-left: 20px;
+        }
+        .content {
+          padding: 8px;
+        }
+        .search-box {
+          @apply(--layout-flex);
+          @apply(--layout-center);
+          @apply(--layout-horizontal);
+        }
+        .search-box input {
+          @apply(--layout-flex);
+        }
+      </style>
+    <paper-scroll-header-panel condenses condensed-header-height="64">
+        <paper-toolbar class="system_color_background">
+            <div class="horizontal layout center">
+                <paper-icon-button icon="arrow-back" onclick="location.href='/'"></paper-icon-button>
+                <div class="flex">
+                    <input-search id='help_searcher_main' class="searcher"></input-search>
+                </div>
+                <paper-button class='system_color' style='right: 0px; position: absolute; background-color:white!important;text-transform: lowercase;' href='mailto:<%=System::Config.first.email_company%>' raised>Entrar em contato</paper-button>
+            </div>
+        </paper-toolbar>
+        <div class="content">
+            <%= yield %>
+        </div>
+    </paper-scroll-header-panel>
+  </body>
+</html>

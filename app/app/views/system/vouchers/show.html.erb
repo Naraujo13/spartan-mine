@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Voucher:</strong>
+  <%= @system_voucher.voucher %>
+</p>
+
+<p>
+  <strong>Dt expire:</strong>
+  <%= @system_voucher.dt_expire %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @system_voucher.email %>
+</p>
+
+<p>
+  <strong>Pricing:</strong>
+  <%= @system_voucher.pricing %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @system_voucher.first_name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @system_voucher.user %>
+</p>
+
+<%= link_to 'Edit', edit_system_voucher_path(@system_voucher) %> |
+<%= link_to 'Back', system_vouchers_path %>

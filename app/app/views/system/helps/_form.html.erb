@@ -1,0 +1,49 @@
+<%= form_for(@system_help) do |f| %>
+  <% if @system_help.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@system_help.errors.count, "error") %> prohibited this system_help from being saved:</h2>
+
+      <ul>
+      <% @system_help.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :sort_description %><br>
+    <%= f.text_field :sort_description %>
+  </div>
+  <div class="field">
+    <%= f.label :like %><br>
+    <%= f.number_field :like %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :post %><br>
+    <%= f.text_area :post %>
+  </div>
+  <div class="field">
+    <%= f.label :viewed %><br>
+    <%= f.number_field :viewed %>
+  </div>
+  <div class="field">
+    <%= f.label :link %><br>
+    <%= f.text_field :link %>
+  </div>
+  <div class="field">
+    <%= f.label :featured %><br>
+    <%= f.check_box :featured %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<div class='row' style="padding: 20px 20px 0px 20px">
+    <div id="image" class='col s6' style="text-align: center;">
+        <img width="400px" height="300px" src="/assets/system/padlock.jpg">
+        <h4><%=t"user_confirmation_title"%></h4>
+        <p style="text-align: center;"><%=t"user_confirmation_info"%><p>
+    </div>
+    <div class='col s6 z-depth-2' style="padding: 40px 20px 10px 20px;">
+      <div class='row' >
+          <div style='display:flex;align-items: center;'>
+              <i class="material-icons medium">security</i>
+              <h2><%=t"user_confirmation"%></h2>
+          </div>
+      </div>
+      <div class='row'>
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="col s12">
+                <%=paper_input "Email", f,"email",@user.email,""%>
+            </div>
+        <% end %>
+      </div>
+      <div class="row" style='position: relative;margin: 0px 10px -37px 0px;'>
+            <div class="col s6">
+            </div>
+            <div class='col s2 offset-s4'>
+                <a class="btn-floating btn-large waves-effect waves-light tooltipped" onClick="try{ga('send', 'event', 'atHome', 'loginEnterPressed')}catch(exception){};resent()" data-position="top" data-tooltip="<%=t'user_password_send_instruction'%>"><i class="material-icons">arrow_forward</i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function resent(){
+        $('form').submit()
+    }
+</script>

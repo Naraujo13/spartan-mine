@@ -1,0 +1,139 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+    <% if devise_error_messages! != "" %>
+        <div id="password_attention" class="modal bottom-sheet">
+            <div class="modal-content">
+                <h4><%=t("app_dialg_attention")%></h4>
+                <p><%= devise_error_messages!%></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><%=t("app_cancel")%></a>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+               $('#password_attention').modal('open')
+            })
+        </script>
+    <% end %>
+    <div class='row' style="padding: 20px 20px 0px 20px">
+        <div id="image" class='col s6 hide-on-med-and-down' style="text-align: center;">
+            <img width="400px" height="300px" id="preload3cfade" src="/assets/system/profile.jpg">
+            <h2><%=t"user_registration_new_account"%></h2>
+            <p style="text-align: center;"><%=t"user_registration_create_account"%><p>
+        </div>
+        <div class='col s12 m12 l6 z-depth-2' style="padding: 40px 20px 10px 20px;">
+          <div class='row' >
+              <div style='display:flex;align-items: center;'>
+                  <i class="material-icons medium">person_add</i>
+                  <h2><%=t"user_registration_create"%></h2>
+              </div>
+          </div>
+          <div class="row">
+                <div class="col s12 m6 l6">
+                    <%=paper_input "Nome", f,"first_name",@user.first_name,"person"%>
+                </div>
+                <div class="col s12 m6 l6">
+                    <%=paper_input "Sobrenome", f,"last_name",@user.last_name,"person"%>
+                </div>
+          </div>
+          <div class='row'>
+            <div class="col s12">
+                <%=paper_input "Email", f,"email",@user.email,"email",false,"email"%>
+                <%=paper_hidden f,"access_token",SecureRandom.hex(4)%>
+            </div>
+          </div>
+          <div class="row">
+              <div class='col s12 m6'>
+                  <%=paper_input t("user_registration_new_password"), f,"password",@user.password,"lock_outline",false,"password"%>
+              </div>
+              <div class="col s12 m6">
+                  <%=paper_input t("user_registration_new_password_conf"), f, "password_confirmation", @user.password_confirmation, "lock_outline",false, "password"%>
+              </div>
+          </div>
+          <div class='row'>
+               <div class="col s7">
+                   <a style="margin-left: 35px;" onClick="location.href='<%=new_session_path(resource_name)%>'" class="waves-effect waves-teal btn-flat"><i class="material-icons left">account_circle</i><%=t"user_registration_i_have"%></a>
+               </div>
+               <div class="col s5">
+                   <a id='create_user' onClick="$(document.querySelector('form')).submit()" class="waves-effect waves-light btn-flat disabled"><i class="material-icons left">person_add</i><%=t"user_registration_new_create"%></a>
+               </div>
+          </div>
+        </div>
+    </div>
+    <script>
+        $first_name = false;
+        $last_name  = false;
+        $email      = false;
+        $password   = false;
+        $("#user_email").on("focusout", function() {
+            if($('#user_email').val() != ""){
+                $email = true
+            }else{
+                $email = false
+            }
+            checkform()
+        })
+        $("#user_first_name").on("focusout", function() {
+            if($('#user_first_name').val() != ""){
+                $first_name = true
+            }else{
+                $first_name = false
+            }
+            checkform()
+        })
+        $("#user_last_name").on("focusout", function() {
+            if($('#user_last_name').val() != ""){
+                $last_name = true
+            }else{
+                $last_name = false
+            }
+            checkform()
+        })
+
+        $("#user_password_confirmation").on("change", function() {
+           if($('#user_password').val() != $('#user_password_confirmation').val()){
+               Materialize.toast('As senhas não são iguais', 2000);
+               $('#user_password').removeClass("valid");
+               $('#user_password').addClass("invalid");
+               $('#user_password_confirmation').removeClass("valid");
+               $('#user_password_confirmation').addClass("invalid");
+                $password = false;
+           }else{
+               $('#user_password').addClass("valid");
+               $('#user_password').removeClass("invalid");
+               $('#user_password_confirmation').addClass("valid");
+               $('#user_password_confirmation').removeClass("invalid");
+                $password = true;
+           }
+            checkform()
+        });
+
+        $("#user_password").on("change", function() {
+           if($('#user_password').val() != $('#user_password_confirmation').val()){
+               Materialize.toast('As senhas não são iguais', 2000);
+               $('#user_password').removeClass("valid");
+               $('#user_password').addClass("invalid");
+               $('#user_password_confirmation').removeClass("valid");
+               $('#user_password_confirmation').addClass("invalid");
+                $password = false;
+           }else{
+               $('#user_password').addClass("valid");
+               $('#user_password').removeClass("invalid");
+               $('#user_password_confirmation').addClass("valid");
+               $('#user_password_confirmation').removeClass("invalid");
+                $password = true;
+           }
+            checkform()
+        });
+
+        function checkform(){
+            if($first_name && $last_name && $password && $email){
+                $("#create_user").removeClass("disabled")
+            }else{
+                $("#create_user").addClass("disabled");
+                Materialize.toast('Preencha todos os campos', 1000);
+            }
+        }
+    </script>
+<% end %>

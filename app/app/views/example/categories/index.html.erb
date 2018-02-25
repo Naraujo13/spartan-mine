@@ -1,0 +1,20 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+        <%=table_header '',[{:name => 'Name'},{:name => 'Name'},{:name => "Dt. Update"}]%>
+
+            <%
+                @example_categories.each do | example_category|
+                    %>
+                        <%= table_row example_category.id,[example_category.description,example_category.description, example_category.updated_at], edit_example_category_path(example_category), example_category.created_at%>
+                    <%
+                end
+            %>
+
+        <%=table_footer%>
+
+	<%=app_footer_page @example_categories, example_categories_path,@total%>
+
+<%=app_footer%>
+<%=app_botton_add new_example_category_path%>

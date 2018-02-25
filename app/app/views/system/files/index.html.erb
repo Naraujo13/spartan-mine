@@ -1,0 +1,17 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+        
+        <%=card_header @system_files, system_files_path%>
+
+            <% @system_files.each do |system_file| %>
+
+                <%=card_item system_file.id, system_file.original_name,User.find(system_file.user_id).first_name, edit_system_file_path(system_file),true,"/data/"+system_file.name%>
+                
+            <% end %>
+
+        <%=card_footer%>
+
+	<%=app_footer_page @system_files, system_files_path,@total%>
+<%=app_footer%>
+<%=app_botton_add new_system_file_path%>

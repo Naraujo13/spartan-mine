@@ -1,0 +1,10 @@
+<%=@page_index = params[:tab]%>
+$('#collection_<%=params[:tab]%>').html('')
+<%
+ @system_bug_statuses.each do |registro|
+  %>
+     $('#collection_<%=params[:tab]%>').append(`<%=list_item registro.id,registro.description,registro.updated_at, edit_example_tag_path(registro),'adb'%>`);
+  <%
+ end
+%>
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@system_bug_statuses, :remote => true).to_s) %>');

@@ -1,0 +1,1 @@
+json.partial! "system_helps/system_help", system_help: @system_help

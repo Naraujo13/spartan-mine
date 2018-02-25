@@ -1,0 +1,60 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  devise:
+    confirmations:
+      confirmed: "Seu endereço de email foi modificado com sucesso."
+      send_instructions: "Você receberá um email com instruções no seu email dentro de alguns minutos."
+      send_paranoid_instructions: "Se seu email existe em nosso banco de dados, você vai receber um email com instruções de como confirmar sua conta em alguns minutos."
+    failure:
+      already_authenticated: "Você entrou com sucesso."
+      inactive: "Sua conta não está ativada ainda."
+      invalid: "%{authentication_keys} ou senha inválidos"
+      locked: "Sua conta está bloqueada."
+      last_attempt: "Você tem um ou mais impedimentos que mantem sua conta bloqueada."
+      not_found_in_database: "Invalido %{authentication_keys} ou seu email."
+      timeout: "Sua sessão expirou. Por favor tente entrar novamente."
+      unauthenticated: "Você precisa entrar ou criar uma conta antes de continuar."
+      unconfirmed: "Verifique o seu email e acesse o link de confirmação, pois você precisa confirmar o email antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruções de Confirmação"
+      reset_password_instructions:
+        subject: "Instruções para modificar Senha"
+      unlock_instructions:
+        subject: "Instruções de Desbloqueio"
+    omniauth_callbacks:
+      failure: "Não é possível autenticar você em %{kind} por \"%{reason}\"."
+      success: "Autenticação com sucesso na %{kind} conta."
+    passwords:
+      no_token: "Você não pode acessar esta página sem vir através de um email de resetação de senha. Se você você está vindo do link que recebestes por email, tenha certeza que está com a URL completa."
+      send_instructions: "Você vai receber um email com instruções de como resetar sua senha dentro de instantes."
+      send_paranoid_instructions: "Se seu email de endereço já existe em nosso sistema, você irá receber um email de recuperação de senha em alguns instantes."
+      updated: "Sua senha foi modificada com sucesso. Você está agora logado."
+      updated_not_active: "Sua senha foi modificada com sucesso."
+    registrations:
+      destroyed: "Tchau! Sua conta foi cancelada com sucesso. Nos esperamos vê-lo em breve."
+      signed_up: "Bem Vindo! Você foi logado com sucesso."
+      signed_up_but_inactive: "Você foi logado com sucesso. Contudo, nos não podemos deixar você entrar, pois sua conta não foi ativada ainda."
+      signed_up_but_locked: "Você entrou com sucesso. Contudo, nos não podemos deixar você entrar, pois sua conta está bloqueada."
+      signed_up_but_unconfirmed: "Uma mensagem com um link de confirmação foi enviado ao seu endereço de email. Por favor siga as intruções do link para ativar sua conta."
+      update_needs_confirmation: "Você atualizou sua conta com sucesso, mas nos necessitamos verificar seu endereço de email. Por favor check seu conta de email e siga as instruções de conifrmação enviadas ao seu email."
+      updated: "Sua conta foi atualizada com sucesso."
+    sessions:
+      signed_in: "Entrou com sucesso."
+      signed_out: "Saiu com sucesso."
+      already_signed_out: "Você já saiu do sistema."
+    unlocks:
+      send_instructions: "Voê vai receber um email com instruções de como desbloquear sua conta em alguns instantes."
+      send_paranoid_instructions: "Se sua conta existe, você receberá um email com instruições de como desboquea-la em alguns instantes."
+      unlocked: "Sua conta foi desbloqueada com sucesso. Por favor entre para continuar."
+  errors:
+    messages:
+      already_confirmed: "Foi confirmado anteriormente, por favor, tente entrar"
+      confirmation_period_expired: "É necessário ser confirmado em %{period}, por favor, peça uma nova"
+      expired: "Expirou! Por favor, peça uma nova"
+      not_found: "Não encontrado"
+      not_locked: "Não foi desbloqueado"
+      not_saved:
+        one: "1 possível erro é %{resource} ao salvar:"
+        other: "%{count} erros prováveis são %{resource} ao tentar salvar:"

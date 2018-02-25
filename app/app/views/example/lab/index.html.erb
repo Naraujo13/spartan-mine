@@ -1,0 +1,13 @@
+<%= app_header t("example_category_categories")%>
+
+	<%=app_header_page%>
+
+		<% @tags.each do |example_tag| %>
+
+			<%=app_list_item_generic example_tag.id,example_tag.title, example_tag.updated_at,edit_example_tag_path(example_tag), [{:icon=>"social:whatshot",:method=>"keyNPressed()",:tooltip=>"Acessibilidade"}],"communication:chat"%>
+
+		<% end %>
+
+	<%=app_footer_page @tags, example_lab_index_path%>
+
+<%=app_footer%>

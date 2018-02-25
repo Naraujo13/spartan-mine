@@ -1,0 +1,27 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require style_inside.css
+ *= require tutorial.css
+ *= require style_fixing.css
+ *= require libs/chartist.min.css
+ *= require custom_inside.css
+ *= require libs/materialize/materialize.scss
+ *= require libs/datatables/jquery.datatables.css
+ *= require libs/tooltip.css
+ *= require libs/materialize_custom/prism/prism.css
+ *= require libs/materialize_custom/perfect-scrollbar/perfect-scrollbar.css
+ *= require libs/materialize_custom/materialize_custom.css
+ *= require libs/materialize_custom/media-hover-effects.css
+ *= require libs/materialize_custom/sweetalert/dist/sweetalert.css
+ *= require libs/materialize_custom/magnific-popup/magnific-popup.css
+ */

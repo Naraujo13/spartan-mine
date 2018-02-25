@@ -1,0 +1,14 @@
+<%=app_header_page%>
+    <%= form_for(@system_access_to_nested_resource) do |f| %>
+
+        <%=paper_select "Usuário",f,@system_access_to_nested_resource.user_id,"user_id", :user_id,User.order("first_name"),"id","first_name","work"%>
+
+        <%if @system_access_to_nested_resource.path%>
+          <%=paper_input "Regex", f, "path", @system_access_to_nested_resource.path, "device_hub"%>
+        <%else%>
+          <%=paper_input "Regex", f, "path", "path/(.*)/path_other/(.*)", "device_hub"%>
+        <%end%>
+
+    <% end %>
+<%=app_footer_page @system_access_to_nested_resource, system_access_tos_path%>
+<%=app_botton_save system_access_to_nested_resources_path %>

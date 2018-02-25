@@ -1,0 +1,20 @@
+<%=@page_index = params[:tab]%>
+$('#collection_<%=params[:tab]%>').html('')
+<%
+ @users.each do |registro|
+     elements = []
+
+     if current_user.admin
+       element = {}
+       element[:id] = registro.id
+       element[:icon] = 'maps:directions-walk'
+       element[:method] = "location.href='/accounts/become?user_id="+registro.id.to_s+"'"
+       element[:tooltip] = t('account_sign_as')+" "+registro.full_name
+       elements << element
+     end
+  %>
+    $('#collection_<%=params[:tab]%>').append(`<%=list_item registro.id,registro.full_name,registro.updated_at, edit_user_path(registro),'person',true,elements%>`);
+  <%
+ end
+%>
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@users, :remote => true).to_s) %>');

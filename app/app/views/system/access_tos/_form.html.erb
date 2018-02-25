@@ -1,0 +1,11 @@
+<%=app_header_page%>
+    
+    <%= form_for(@system_access_to) do |f| %>
+
+        <%=paper_select t("access_user"),f,@system_access_to.user_id,"user_id", :user_id,User.order("first_name"),"id","first_name","work"%>
+
+        <%=paper_select t("access_program"),f,@system_access_to.program_id,"program_id", :program_id,System::Program.order("locate_label"),"id","locate_label","apps"%>
+
+    <% end %>
+<%=app_footer_page @system_access_to, system_access_tos_path%>
+<%=app_botton_save system_access_tos_path %>

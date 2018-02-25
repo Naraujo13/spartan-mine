@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=t "title_short"%></title>
+	<link rel="icon" type="image/png" href="/assets/logo/small.png" />
+	<link rel="author" href="https://plus.google.com/+GlaucoRobertoMunsberg" />
+	<meta name="description" content="<%=t "title"%>">
+	<meta property="og:title" content="<%=t "title_short"%>" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="/assets/logo/full.png" />
+	<meta property="og:url" content="<%=root_url%>" />
+	<meta property="fb:admins" content="100000197237018" />
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:url" content="<%=root_url%>">
+	<meta name="twitter:image" content="/assets/logo/full.png">
+	<meta name="twitter:description" content="<%=t "title_short"%>">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<%=javascript_include_tag 'outside', 'data-turbolinks-track' => true %>
+	<%=stylesheet_link_tag 'outside', media: 'all', 'data-turbolinks-track' => true %>
+	<%=csrf_meta_tags %>
+	<script async type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=new Date;
+        ga('create', '<%=System::Config.first.google_analytics_id%>', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+</head>
+<body >
+    <div style="display:none">
+        <%= link_to "Logout", destroy_user_session_path, :method => :get ,:id=>"a_logout"%>
+    </div>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">
+                <img onclick="location.href='<%=root_path%>'" style="cursor:pointer;height:60px;auto" src="<%= asset_path 'logo/negative.png'%>"/>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a class="waves-effect waves-light btn-flat tooltipped"  id='paper_logout' onclick="try{ga('send', 'event', 'atHome', 'forbiddenSignOut')}catch(exception){};logout()"  data-tooltip="<%=t"forbidden_out_of_account"%> <%=current_user.first_name%>" style="color:white"><i class="material-icons right" >exit_to_app</i><%=t"forbidden_out_of_account"%></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <%= yield %>
+    </div>
+</body>
+<script type="text/javascript">
+    function logout(){
+        document.querySelector('a').click()
+    }
+</script>
+</html>

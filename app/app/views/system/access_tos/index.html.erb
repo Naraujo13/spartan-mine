@@ -1,0 +1,52 @@
+<%= app_header [t("access_access_permi"), t("access_nested_routes")]%>
+
+	<%=app_header_page%>
+        
+        <%=list_header @system_access_tos, system_access_tos_path%>
+            <% @system_access_tos.each do | system_access_to | %>
+
+                <%user = User.find(system_access_to.user_id)%>
+                <%program = System::Program.find(system_access_to.program_id)%>
+                <%=list_item system_access_to.id, user.first_name+"/"+t(program.locate_label), program.description, edit_system_access_to_path(system_access_to), "launch"%>
+
+            <%end%>
+        <%=list_footer %>
+
+	<%= app_footer_page @system_access_tos, system_access_tos_path%>
+
+	<%=app_header_page "1"%>
+        
+        <%=list_header @system_access_tos, system_access_tos_path%> 
+            <% @system_access_to_nested_resources.each do |system_nested| %>
+
+                <%user = User.find(system_nested.user_id)%>
+                <%=list_item system_nested.id, user.first_name, system_nested.path, edit_system_access_to_nested_resource_path(system_nested), "device-hub"%>
+
+            <%end%>
+        <%=list_footer %>
+
+	<%= app_footer_page @system_access_to_nested_resources, system_access_to_nested_resources_path%>
+	
+<%=app_footer%>
+
+<%= app_botton_add new_system_access_to_path%>
+<script>
+	iconAdd = document.querySelector(".btn-floating")
+	$(iconAdd).attr('onClick',"createNewAccess()");
+    $active = 0
+    $('ul.tabs').on('click', 'a', function(e) {
+        if(e.target.baseURI.endsWith("#tab_1")){
+            $active = 1
+        }else{
+            $active = 0
+        }
+    });
+    
+	function createNewAccess(){
+		if($active != 0){
+			location.href = "<%=new_system_access_to_path%>"
+		}else{
+			location.href = "<%=new_system_access_to_nested_resource_path%>"
+		}
+	}
+</script>

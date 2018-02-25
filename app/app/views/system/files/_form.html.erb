@@ -1,0 +1,22 @@
+<%=app_header_page%>
+    <%= form_for(@system_file) do |f| %>
+
+        <div class="row">
+            <div class="col s8">
+                <%if @system_file.name == nil%>
+                   <%= f.file_field :name, multiple: true %>
+               <%else%>
+                   <%=paper_download_file t("file_name"),'/data/'+@system_file.name%>
+               <%end%>
+            </div>
+            <div class="col s4">
+                <%=paper_checkbox t("file_public"), f, :public, f.object.public, "public","visibility"%>
+            </div>
+        </div>
+        
+        <%=paper_hidden f,"user_id",current_user.id%>
+
+    <% end %>
+<%=app_footer_page @system_file, system_files_path%>
+<%=app_botton_save system_files_path %>
+ 

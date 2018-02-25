@@ -1,0 +1,10 @@
+$('paper-a').html('')
+<%
+ @system_files.each do |registro|
+  %>
+    $('paper-a').append("<%=app_list_item_js registro.id,registro.name,User.find(system_file.user_id).first_name, example_tag_path(registro),edit_example_tag_path(registro),'file-upload'%>");
+  <%
+ end
+%>
+$('#paginator').html('<%=escape_javascript(paginate(@system_files, :remote => true).to_s) %>');
+refreshRepresentation();

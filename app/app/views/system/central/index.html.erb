@@ -1,0 +1,71 @@
+<!--app_header -->
+		<iron-tabs  name='app_tabs' id='app_tabs' selected='0' flex >
+		</iron-tabs>
+	</div>
+</paper-toolbar>
+<div class='container-fluid' >
+		<iron-pages id='app_pages' selected='0'>
+<!--app_header -->
+<!--app_header_page -->
+			<div>
+				<paper-material elevation='1' id='paper_shodow' style='margin: 10px 10px;'>
+					<script>
+						$(document).ready(function(){
+							$('#controllers').html('<h2 style="font-weight: 100;">Central</h2>')
+						})
+					</script>
+<!--app_header_page -->
+						<div class='horizontal layout around-justified center' style="margin:10px 0px 40px 0px;padding: 20px 0px 20px 0px;">
+							<div id="help_resume">
+								<h2 style='font-weight: 100;margin-left: -36px;'><%=t"central_hello"%> <%=current_user.first_name%>, <%=t"central_see"%></h2>
+								<div class='vertical layout'>
+									<div>
+										<div class='horizontal layout'>
+											<div class='flex'>
+												<iron-icon></iron-icon><h3 style="font-weigth:100"><%=t"central_messenges"%></h3>
+											</div>
+										</div>
+									</div>
+									<div class='verticial layout'>
+										<%
+											@bugs = System::BugMessage.joins("join system_bugs as b on system_bug_id = b.id").where("message_to = 'user' and user_id = "+current_user.id.to_s).select("message,displayed, b.id").limit(20)
+											@bugs.each  do |bug|
+												%>
+										<div class='horizontal layout center' onclick='location.href="<%="/system/bugs/"+bug.id.to_s+"/edit"%>"'  style='margin-left:20px;cursor:pointer' >
+														<div class='one'>
+															<paper-icon-button icon="<%= bug.displayed ? 'social:notifications-none' : 'social:notifications'%>"></paper-icon-button>
+														</div>
+														<div class='flex' style="font-family:Roboto">
+															<%=bug.message%>
+														</div>
+													</div>
+												<%
+											end
+											if @bugs.empty?
+												%>
+													<div class='horizontal layout center' style='margin-left:20px'>
+														<div class='one' >
+															<paper-icon-button icon='cloud-queue'></paper-icon-button>
+														</div>
+														<div class='flex' style='margin-left:10px;font-family:Roboto'>
+															Sem Registros
+														</div>
+													</div>
+												<%
+											end
+										%>
+									</div>
+								</div>
+							</div>
+							<div>
+								<%=image_tag "system/megaphone.png", :style=>"width:250px"%>
+							</div>
+						</div>
+
+<!-- app_footer_page-->
+				</paper-material>
+			</div>
+<!-- app_footer_page-->
+<!-- app_footer-->
+		</iron-pages>
+<!-- app_footer-->

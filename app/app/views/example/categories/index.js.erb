@@ -1,0 +1,10 @@
+<%=@page_index = params[:tab]%>
+$('#collection_<%=params[:tab]%>').html('')
+<%
+ @example_categories.each do |registro|
+  %>
+     $('#collection_<%=params[:tab]%>').append(`<%=list_item registro.id,registro.description,registro.updated_at, edit_example_category_path(registro),'turned_in'%>`);
+  <%
+ end
+%>
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@example_categories, :remote => true).to_s) %>');

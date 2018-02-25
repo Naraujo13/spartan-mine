@@ -1,0 +1,11 @@
+<%= @page_index = params[:tab]%>
+
+$('#collection_<%=params[:tab]%>').html('')
+
+  <% @museums.each do | museum | %>
+
+     $('#collection_<%=params[:tab]%>').append(`<%=list_item museum.id, museum.cod_museum,museum.updated_at, edit_museum_path(museum),"chat",true%>`);
+
+     <% end %>
+
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@museums, :remote => true).to_s) %>');

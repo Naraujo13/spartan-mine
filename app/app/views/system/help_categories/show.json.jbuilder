@@ -1,0 +1,1 @@
+json.partial! "system_help_categories/system_help_category", system_help_category: @system_help_category

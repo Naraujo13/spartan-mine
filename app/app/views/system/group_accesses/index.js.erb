@@ -1,0 +1,10 @@
+<%=@page_index = params[:tab]%>
+$('#collection_<%=params[:tab]%>').html('')
+<%
+ @system_group_accesses.each do |registro|
+  %>
+    $('#collection_<%=params[:tab]%>').append(`<%=list_item registro.id,registro.title,registro.updated_at, edit_example_tag_path(registro),'group'%>`);
+  <%
+ end
+%>
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@system_group_accesses, :remote => true).to_s) %>');

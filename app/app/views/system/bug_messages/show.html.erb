@@ -1,0 +1,33 @@
+
+
+ <%= app_header_show%>
+
+   <%=paper_textarea_show t("bug_problem"), System::Bug.find(@system_bug_message.system_bug_id).problem, "bug-report"%>
+
+   <%if @system_bug_message.admin_id == nil%>
+    <div class='horizontal layout center' >
+      <paper-item class='one' style='display:inline-block'>
+        <iron-icon icon='social:person' style='margin-right:10px;'></iron-icon>
+        <paper-tooltip>
+          <%=t"bug_you_at"%> <%=@system_bug_message.created_at.strftime("%d/%m/%Y %H:%M")%>
+        </paper-tooltip>
+      </paper-item>
+      <paper-item class='flex' style="margin-left:-30px">
+        <%=@system_bug_message.message%>
+      </paper-item>
+    </div>
+   <%else%>
+    <div class='horizontal layout center' >
+      <paper-item class='flex' style="text-align: right;">
+        <%=@system_bug_message.message%>
+      </paper-item>
+      <paper-item class='one' style='display:inline-block'>
+        <iron-icon icon='supervisor-account' style='margin-right:10px;width: 60px;'></iron-icon>
+        <paper-tooltip><%=User.find(@system_bug_message.admin_id).first_name%> <%=t"bug_at"%> <%=mensagem.created_at.strftime("%d/%m/%Y %H:%M")%></paper-tooltip>
+      </paper-item>
+    </div>
+   <%end%>
+
+ 	<%= app_footer_page_show system_bug_messages_path, edit_system_bug_message_path(@system_bug_message)%>
+
+ <%= app_footer_show %>

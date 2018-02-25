@@ -1,0 +1,17 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+        <%=list_header @system_vouchers, system_vouchers_path%>
+
+            <% @system_vouchers.each do |system_voucher| %>
+
+                <%=list_item system_voucher.id,system_voucher.first_name,system_voucher.dt_expire,edit_system_voucher_path(system_voucher),"card_giftcard"%>
+        
+            <% end %>
+
+        <%=list_footer %>
+        
+	<%=app_footer_page @system_vouchers, system_vouchers_path, @total%>
+<%=app_footer%>
+<%=app_botton_add new_system_voucher_path%>

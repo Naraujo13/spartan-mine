@@ -1,0 +1,32 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+        <%=list_header @users, '/accounts'%>
+
+            <% @users.each do |user| %>
+
+				<%
+					elements = []
+
+					if current_user.admin
+						element = {}
+						element[:id] = user.id
+						element[:icon] = 'directions_walk'
+						element[:method] = "location.href='/accounts/become?user_id="+user.id.to_s+"'"
+						element[:tooltip] = t('account_sign_as')+" "+user.full_name
+						elements << element
+					end
+
+				%>
+
+				<%=list_item user.id,user.full_name,user.updated_at, edit_user_path(user), "person", true, elements%>
+
+	  	    <% end %>
+
+        <%=list_footer %>
+        
+	<%=app_footer_page @users, '/accounts', @total%>
+
+<%=app_footer%>
+<%=app_botton_add new_user_path%>

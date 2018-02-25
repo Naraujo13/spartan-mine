@@ -1,0 +1,33 @@
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+	<%= devise_error_messages! %>
+	<%= f.hidden_field :reset_password_token %>
+	<div class='row' style="margin: 20px 20px 0px 20px">
+		<div class='col s6' style="text-align:center;margin:40px 0px 0px 0px">
+            <img style='width:400px;height:300px' src='/assets/system/padlock.jpg'>
+			<h4><%=t"user_password_change"%></h4>
+			<p><%=t"user_password_change_info"%></p>
+		</div>
+		<div class='col s6 z-depth-2' style="margin: 40px 0px 0px 0px;padding:20px 20px">
+			<div class='row'>
+				<h4><%=t"user_password_type_new"%></h4>
+			</div>
+			<div class='row'>
+				<div class="col s6">
+					<%=paper_input t("user_password_new_passw"), f,"password","","lock",false,'password'%>
+				</div>
+				<div class="col s6">
+					<%=paper_input t("user_password_new_repeat"), f,"password_confirmation","","lock_outline",false,'password'%>
+				</div>
+			</div>
+			<div class='row'>
+                <a class="waves-effect waves-light btn"  onclick="location.href='<%=root_path%>'"><i class="material-icons left">arrow_back</i><%=t"user_password_back"%></a>
+				<a class="waves-effect waves-light btn"  onclick="document.querySelector('form').submit()"><i class="material-icons right">save</i><%=t"user_password_change_my"%></a>
+			</div>
+		</div>
+	</div>
+<% end %>
+<style>
+	form{
+    width: 100%;
+	}
+</style>

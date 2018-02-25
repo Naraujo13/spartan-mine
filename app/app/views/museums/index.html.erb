@@ -1,0 +1,19 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+			<%=list_header @museums, museums_path%>
+
+
+					<% @museums.each do |museum| %>
+
+						<%=list_item museum.id, museum.cod_museum, museum.phone, edit_museum_path(museum),"account_balance",true%>
+
+					<% end %>
+
+			<%=list_footer %>
+
+		<%= app_footer_page @museums, museums_path%>
+
+<%= app_footer%>
+<%= app_botton_add new_museum_path %>

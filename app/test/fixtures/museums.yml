@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cod_museum: MyString
+  name: MyString
+  reference: 
+  reference: 
+  address: MyString
+  phone: MyString
+  opening_hours: MyString
+  description: MyString
+
+two:
+  cod_museum: MyString
+  name: MyString
+  reference: 
+  reference: 
+  address: MyString
+  phone: MyString
+  opening_hours: MyString
+  description: MyString

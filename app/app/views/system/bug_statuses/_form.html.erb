@@ -1,0 +1,11 @@
+<%=app_header_page%>
+  
+
+    <%= form_for(@system_bug_status) do |f| %>
+
+       <%=paper_input t("bug_status_description"), f,"description",@system_bug_status.description,"adb"%>
+
+
+    <% end %>
+<%=app_footer_page @category_program, system_bug_statuses_path%>
+<%=app_botton_save system_bug_statuses_path %>

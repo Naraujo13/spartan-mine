@@ -1,0 +1,55 @@
+<div class="flex" style='width: 100%;'>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+	<%= devise_error_messages! %>
+		<% if notice or alert
+
+			if notice
+				notification = notice
+			else
+				notification = alert
+			end
+
+			%>
+			<script>
+				document.addEventListener('WebComponentsReady', function(){
+					dialogOpen('<%=t"app_dialg_attention"%>',"<%=notification%>","<%=t'app_understood'%>","CANCEL",'','');
+				});
+			</script>
+		<% end %>
+	<div class='row' style="margin: 20px 20px 0px 20px">
+		<div id="image" class='col s6' style="text-align: center;margin-top:20px">
+			<img style='width:400px;height:300px' id="preload3cfade" src="/assets/system/padlock.jpg" >
+			<h4><%=t"user_password_lost"%></h4>
+			<p style="text-align: center;"><%=t"user_password_dont_worry"%></p>
+		</div>
+		<div class='col s16 z-depth-2' style="margin: 20px 20px 10px 20px;padding:20px 20px">
+			<div class='row' style="margin-top:10px">
+				<h4><%=t"user_password_you_lost"%></h4>
+			</div>
+			<%=paper_input t("user_password_inform_your"), f,"email",@user.email,"email"%>
+			<div class='row '>
+				<div style="margin-left: 35px;margin-top:10px" onClick="document.querySelector('form').submit()">
+					<a class="waves-effect waves-light btn"><i class="material-icons right">send</i><%=t"user_password_send_instruction"%></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+<script type="text/javascript">
+	$( window ).resize(function(){
+		if($(window).width() < 770){
+			$("#image").css('display','none')
+		}else{
+			$("#image").css('display','')
+		}
+	});
+	document.addEventListener('WebComponentsReady', function(){
+		if($(window).width() < 770){
+			$("#image").css('display','none');
+		}else{
+			$("#image").css('display','')
+		}
+	});
+</script>

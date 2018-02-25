@@ -1,0 +1,10 @@
+<%=@page_index = params[:tab]%>
+$('#collection_<%=params[:tab]%>').html('')
+<%
+ @example_posts.each do |registro|
+  %>
+    $('#collection_<%=params[:tab]%>').append(`<%=card_item registro.id,registro.title,registro.description, edit_example_post_path(registro)%>`);
+  <%
+ end
+%>
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@example_posts, :remote => true).to_s) %>');

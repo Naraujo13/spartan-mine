@@ -1,0 +1,119 @@
+<%= app_header t("file_file")%>
+
+	<%=app_header_page %>
+
+		<%if not @response_git_ok%>
+			<div class='vertical layout end'>
+				<paper-icon-button onclick="document.querySelector('#dialog_info').toggle()" icon='info-outline'></paper-icon-button>
+				<paper-dialog modal id='dialog_info'>
+				  <h2><%=t'updater_server'%></h2>
+				  <paper-dialog-scrollable>
+				    <%=t'updater_server_info'%>
+				  </paper-dialog-scrollable>
+				  <div class="buttons">
+				    <paper-button dialog-confirm autofocus><%=t'app_understood'%></paper-button>
+				  </div>
+				</paper-dialog>
+			</div>
+			<div class='vertical layout center'>
+				<img src='/assets/system/updater/cloud_out.svg'></img>
+				<h2><%=t'updater_server_out'%></h2>
+				<p><%=t'updater_server_out_try_again'%></p>
+			</div>
+		<%elsif not @git_local%>
+			<div class='vertical layout end'>
+				<paper-icon-button onclick="document.querySelector('#dialog_info').toggle()" icon='info-outline'></paper-icon-button>
+				<paper-dialog modal id='dialog_info'>
+				  <h2>Git</h2>
+				  <paper-dialog-scrollable>
+				    <%=t'updater_git_info'%>
+				  </paper-dialog-scrollable>
+				  <div class="buttons">
+				    <paper-button dialog-confirm autofocus><%=t'app_understood'%></paper-button>
+				  </div>
+				</paper-dialog>
+			</div>
+			<div class='vertical layout center'>
+				<img src='/assets/system/updater/git.svg'></img>
+				<h2><%=t'updater_git_out'%></h2>
+				<p><%=t'updater_git_out_try_again'%></p>
+			</div>
+		<%elsif not @git_remote%>
+			<div class='vertical layout end'>
+				<paper-icon-button onclick="document.querySelector('#dialog_info').toggle()" icon='info-outline'></paper-icon-button>
+				<paper-dialog modal id='dialog_info'>
+				  <h2>GitHub</h2>
+				  <paper-dialog-scrollable>
+				    <%=t'updater_github_info'%>
+				  </paper-dialog-scrollable>
+				  <div class="buttons">
+				    <paper-button dialog-confirm autofocus><%=t'app_understood'%></paper-button>
+				  </div>
+				</paper-dialog>
+			</div>
+			<div class='vertical layout center'>
+				<img src='/assets/system/updater/git_hub.svg'></img>
+				<h2><%=t'updater_github_athome_out'%></h2>
+				<div style="background-color: black; color: white; padding: 0px 10px;">
+					<p>$ git remote add athome git@github.com:<%=@config.at_home_version_repository%>.git</p>
+				</div>
+			</div>
+		<%elsif not @git_updated%>
+			<div class='vertical layout end'>
+				<paper-icon-button onclick="document.querySelector('#dialog_info').toggle()" icon='info-outline'></paper-icon-button>
+				<paper-dialog modal id='dialog_info'>
+				  <h2><%=t'updater_update_dialog'%></h2>
+				  <paper-dialog-scrollable>
+				    <%=t'updater_update_dialog_info'%>
+				  </paper-dialog-scrollable>
+				  <div class="buttons">
+				    <paper-button dialog-confirm autofocus><%=t'app_understood'%></paper-button>
+				  </div>
+				</paper-dialog>
+			</div>
+			<div class='horizontal layout center'>
+				<img class='flex-1'src='/assets/system/updater/paper-bag.svg' style="margin:20px"></img>
+				<div class='flex-2' style="margin:20px">
+					<h2><%=t'updater_new_version'%></h2>
+					<h4 style="margin: 0px !important;"><%=@response_git['name']%> (<%=t'app_version'%> -> <%=@response_git['tag_name']%>)</h4>
+					<div >
+						<iron-icon icon='event' style="margin-left: -3px; margin-top: -3px; margin-right: 5px;"></iron-icon><%=@response_git['published_at'][0..9]%>
+					</div>
+					<p>
+						<%@response_git['body'].gsub!("\r\n","<br />")%>
+						<%=@response_git['body'].html_safe%>
+					</p>
+					<div class='horizontal layout end-justified '>
+						<paper-button onclick="document.querySelector('#dialog_update').toggle()" raised><iron-icon icon="notification:sync"></iron-icon><%=t'updater_update_dialog'%></paper-button>
+					</div>
+					<paper-dialog modal id='dialog_update'>
+					  <h2><%=t'updater_update_dialog'%></h2>
+					  <paper-dialog-scrollable>
+							<p><%=t'updater_update_open_command'%></p>
+							<div style="background-color: black; color: white; padding: 0px 10px;">
+								<p>$ git pull --force athome</p>
+							</div>
+							<div><%=t'updater_update_open_command_detail'%></div>
+					  </paper-dialog-scrollable>
+					  <div class="buttons">
+							<paper-button dialog-confirm autofocus><%=t'app_understood'%></paper-button>
+					  </div>
+					</paper-dialog>
+				</div>
+
+			</div>
+		<%else%>
+			<div class='vertical layout end'>
+				<paper-icon-button icon='cloud-download' onclick="location.href='<%=@response_git['zipball_url']%>'"></paper-icon-button>
+			</div>
+			<div class='horizontal layout center'>
+				<img class='flex-1'src='/assets/system/updater/paper-bag.svg' style="margin:20px"></img>
+				<div class='flex-2' style="margin:20px">
+					<h2><%=t'updater_updated_version'%></h2>
+					<h4 style="margin: 0px !important;"><%=@response_git['name']%> (<%=t'app_version'%>)</h4>
+				</div>
+			</div>
+
+		<%end%>
+	<%= app_footer_page [1],nil%>
+<%=app_footer%>

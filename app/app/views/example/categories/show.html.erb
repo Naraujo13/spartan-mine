@@ -1,0 +1,9 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+		<%=paper_input_show t("example_category_categories"), @example_category.description, "description"%>
+
+	<%= app_footer_page_show example_categories_path, edit_example_category_path(@example_category)%>
+
+<%= app_footer_show %>

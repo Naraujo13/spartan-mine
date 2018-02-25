@@ -1,0 +1,32 @@
+<%=app_header_page%>
+
+  <%= form_for(@museum) do |f| %>
+
+                          <%=paper_input :cod_museum, f,"cod_museum", @museum.cod_museum,"",true%>
+
+      
+                                        <%=paper_input :name, f,"name", @museum.name,"",true%>
+
+      
+                                        <%=paper_input :reference, f,"reference", @museum.reference,"",true%>
+
+      
+                                        <%=paper_input :reference, f,"reference", @museum.reference,"",true%>
+
+      
+                                        <%=paper_input :address, f,"address", @museum.address,"",true%>
+
+      
+                                        <%=paper_input :phone, f,"phone", @museum.phone,"",true%>
+
+      
+                                        <%=paper_input :opening_hours, f,"opening_hours", @museum.opening_hours,"",true%>
+
+      
+                                        <%=paper_input :description, f,"description", @museum.description,"",true%>
+
+      
+                    <% end %>
+
+<%=app_footer_page @museum,museums_path%>
+<%=app_botton_save museums_path %>

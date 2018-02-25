@@ -1,0 +1,248 @@
+<%= form_for(@system_bug) do |f| %>
+  <div>
+    <%if @system_bug.errors.any? %>
+        <div id='error_explanation'>
+          <paper-dialog modal id='dialog_error'>
+            <h2><%=t("app_dialog_attention_at_erro")%></h2>
+            <paper-dialog-scrollable>
+              <% register.errors.full_messages.each do |message| %>
+                <p style='margin-left:25px'><iron-icon icon='content-paste' style='margin-right:5px'></iron-icon><%=message%></p>
+              <%end%>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+              <paper-button dialog-confirm><%=t'app_understood'%></paper-button>
+            </div>
+          </paper-dialog>
+        </div>
+    <%end%>
+  <paper-material elevation='1' style='margin: 10px 15px 10px 25px;'>
+  	<div class='horizontal layout end' style="margin:10px 0px 0px -15px">
+  		<paper-tooltip for="label_voltar"><%=t"app_back"%></paper-tooltip>
+  		<script>
+  			$(document).ready(function(){
+  				$('#controllers').html('<h2 style="font-weight: 100;">Reportar Erro</h2>');
+  			})
+  		</script>
+  	</div>
+      <div style="margin-left:20px">
+      <%if current_user.admin?%>
+
+        <div class='horizontal layout end' style='margin-left:-20px'>
+        <h1 style="font-weight:100">Erro Relatado</h1>
+      </div>
+
+      <%=paper_input_show t("bug_person"), User.find(@system_bug.user_id).first_name, "social:person"%>
+      <%=paper_input_show "Email", User.find(@system_bug.user_id).email, "communication:email"%>
+        <%=paper_textarea_show t("bug_problem"), @system_bug.problem, "bug-report"%>
+        <%if @system_bug.bug_status_id == 2%>
+          <div class='horizontal layout end'>
+            <div class='one'>
+              <paper-icon-button  icon="event" id='label_event'></paper-icon-button>
+              <paper-tooltip for="label_event"><%=t"bug_ocurrence"%><paper-tooltip>
+            </div>
+            <div class='flex'>
+              <paper-input label="<%=t"bug_reported_at"%>" disabled type="text" value="<%=@system_bug.created_at.strftime("%d/%m/%Y %H:%M")%>" ></paper-input>
+            </div>
+            <div class='flex'>
+              <paper-input label="<%=t"bug_end_at"%>" disabled type="text" value="<%=@system_bug.updated_at.strftime("%d/%m/%Y %H:%M")%>"></paper-input>
+            </div>
+          </div>
+        <%else%>
+          <div class='horizontal layout end'>
+            <div class='one'>
+              <paper-icon-button id='label_reported' icon="event"></paper-icon-button>
+              <paper-tooltip for="label_reported"><%=t"bug_reported_at"%></paper-tooltip>
+            </div>
+            <div class='flex'>
+              <paper-input label="<%=t"bug_reported_at"%>" disabled type="text" value="<%=@system_bug.created_at.strftime("%d/%m/%Y %H:%M")%>" ></paper-input>
+            </div>
+          </div>
+        <%end%>
+        <%=paper_select "Status",f,@system_bug.bug_status_id,"bug_status_id", :bug_status_id, System::BugStatus.order("description"), "id","description","notification:adb"%>
+
+      <%else%>
+
+        <% if @system_bug.persisted?%>
+          <div class='horizontal layout end' style='margin-left:-5px'>
+            <h1 style='font-weight:100'><%=t"bug_detail"%></h1>
+          </div>
+
+          <%=paper_textarea_show "Problema", @system_bug.problem, "bug-report"%>
+          <%if @system_bug.bug_status_id == 2%>
+            <div class='horizontal layout end'>
+              <div class='one'>
+                <paper-icon-button id='label_event'  icon="event"></paper-icon-button>
+                <paper-tooltip for="label_event"><%=t"bug_ocurrence"%></paper-tooltip>
+              </div>
+              <div class='flex'>
+                <paper-input label="<%=t"bug_reported_at"%>" disabled type="text" value="<%=@system_bug.created_at.strftime("%d/%m/%Y %H:%M")%>" ></paper-input>
+              </div>
+              <div class='flex'>
+                <input label="<%=t"bug_end_at"%>" disabled type="text" value="<%=@system_bug.updated_at.strftime("%d/%m/%Y %H:%M")%>">
+              </div>
+            </div>
+
+          <%else%>
+            <div class='horizontal layout end'>
+              <div class='one'>
+                <paper-icon-button id='label_reported' icon="event"></paper-icon-button>
+                <paper-tooltip for="label_reported"><%=t"bug_reported_at"%></paper-tooltip>
+              </div>
+              <div class='flex'>
+                <paper-input label="<%=t"bug_reported_at"%>" disabled type="text" value="<%=@system_bug.created_at.strftime("%d/%m/%Y %H:%M")%>" ></paper-input>
+              </div>
+            </div>
+          <%end%>
+          <%=paper_select_show "Status",@system_bug.bug_status_id,System::BugStatus.order("description"), "id","description","notification:adb"%>
+          <input type="hidden" name="system_bug[user_id]" id="system_bug[user_id]" value="<%=@system_bug.user_id%>">
+      <%else%>
+        <div class='horizontal layout end' style='margin-left:-5px'>
+          <h1 style="font-weight:100"><%=t"bug_describe"%></h1>
+        </div>
+
+        <%=paper_textarea t("bug_problem"),f,"problem",@system_bug.problem, "bug-report"%>
+        <%=paper_select_show "Status",1,System::BugStatus.order("description"), "id","description","notification:adb"%>
+        <input type="hidden" name="system_bug[bug_status_id]" id="system_bug_bug_status_id" value="1">
+        <input type="hidden" name="system_bug[user_id]" id="system_bug[user_id]" value="<%=current_user.id%>">
+      <%end%>
+
+    <%end%>
+
+    </div>
+    <%if @system_bug.persisted?%>
+      <div class='flex'>
+        <h1 style='font-weight:100'><iron-icon icon='question-answer' style='margin-right:5px'></iron-icon><%=t"bug_menssages"%></h1>
+      </div>
+
+      <div style="margin: 20px 20px 0px 20px">
+        <div class='horizontal layout'>
+          <div id="mensagens" class='flex'>
+            <%@mensagens = System::BugMessage.where(:system_bug_id=>@system_bug.id).order(:created_at)
+              @mensagens.each do |mensagem|%>
+               <% if not current_user.admin?
+                  mensagem.update_attributes(:displayed => true)
+                  mensagem.save
+                 end
+                %>
+              <%if mensagem.message_from != "admin"%>
+                <div class='horizontal layout center' >
+                  <paper-item class='one' style='display:inline-block'>
+                    <iron-icon id="<%=mensagem.id%>" icon='social:person' style='margin-right:10px;'></iron-icon>
+                    <paper-tooltip for="<%=mensagem.id%>">
+                      <%=t"bug_you_at"%> <%=mensagem.created_at.strftime("%d/%m/%Y %H:%M")%>
+                    </paper-tooltip>
+                  </paper-item>
+                  <paper-item class='flex' style="margin-left:-30px">
+                    <%=mensagem.message%>
+                  </paper-item>
+                </div>
+              <%else%>
+                <div class='horizontal layout center' >
+                  <paper-item class='flex' style="text-align: right;">
+                    <%=mensagem.message%>
+                  </paper-item>
+                  <paper-item class='one' style='display:inline-block'>
+                    <iron-icon id="<%=mensagem.id%>" icon='supervisor-account' style='margin-right:10px;width: 60px;'></iron-icon>
+                    <paper-tooltip for="<%=mensagem.id%>"><%=User.find(mensagem.admin_id).first_name%> <%=t"bug_at"%> <%=mensagem.created_at.strftime("%d/%m/%Y %H:%M")%></paper-tooltip>
+                  </paper-item>
+                </div>
+              <%end%>
+            <%end%>
+          </div>
+        </div>
+        <div class='horizontal end-justified layout' >
+          <div class='one' style="margin-top: 14px;margin-right: 5px;">
+            <iron-icon style="width: 36px;height: 36px;"icon='communication:message'></iron-icon>
+          </div>
+          <div class='flex'>
+            <%if @system_bug.bug_status_id == 2%>
+              <paper-input id="bug_message" disabled label='<%=t"bug_your_menssage"%>...' type="text"></paper-input>
+
+            <%else%>
+              <paper-input id="bug_message" label='<%=t"bug_your_menssage"%>...' type="text"></paper-input>
+            <%end%>
+
+          </div>
+          <div class='one' style="margin-right: 15px;margin-top: 12px;margin-left: 5px;">
+            <%if @system_bug.bug_status_id == 2%>
+              <paper-button disabled onclick="send()" raised>
+                <iron-icon icon='send' class='system_color_disabled'></iron-icon>
+              </paper-buttom>
+            <%else%>
+              <paper-button onclick="send()" raised>
+                <iron-icon icon='send' class='system_color'></iron-icon>
+              </paper-buttom>
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+    <%end%>
+  <!-- footer-->
+        <div class='horizontal end-justified layout' style='margin-top:20px'>
+
+          <div  onClick="$(document.querySelector('form')).submit()">
+            <%if current_user.admin?%>
+              <paper-fab class="system_color_background" style="position: absolute; right: 10px; bottom: -28px;" icon="save" role="button" tabindex="0" aria-label="save"></paper-fab>
+            <%else%>
+              <%if not @system_bug.persisted?%>
+                <paper-fab class="system_color_background" style="position: absolute; right: 10px; bottom: -28px;" icon="save" role="button" tabindex="0" aria-label="save"></paper-fab>
+              <%end%>
+            <%end%>
+          </div>
+        </div>
+        <paper-toast id="toast_bug" text="Connection timed out. Showing limited messages.">
+          <div style="color: #00bcd4" on-tap="{{retry}}"><%=t"bug_retry"%></div>
+        </paper-toast>
+    </paper-material>
+</div>
+<!-- footer-->
+<% end %>
+
+<script type="text/javascript">
+
+	function send(){
+		if($('#bug_message').val() == ""){
+			$('#toast_bug').attr('text','<%=t"bug_insert_after_send"%>');
+			document.querySelector('#toast_bug').toggle();
+		}else{
+			document.querySelector('x-spinner').active = true;
+			$.ajax({
+					url : "../../bug_messages",
+					dataType : "json",
+					type:"POST",
+					data:{
+					bug_message:{
+						displayed:false,
+						message:$('#bug_message').val(),
+						system_bug_id:"<%=@system_bug.id%>",
+						id:null
+					}
+				},
+				beforeSend: function(){
+					document.querySelector('#bug_message').disabled = true;
+				},
+				success : function($data){
+					$('#toast_bug').attr('text','<%=t"bug_send_with_success"%>');
+					document.querySelector('#toast_bug').toggle()
+					console.log($data);
+					<%if current_user.admin?%>
+						$("#mensagens").append("<div class='horizontal end-justified layout' ><paper-item class='flex' style='margin-right:-30px;text-align: right;'>"+$('#bug_message').val()+"</paper-item><paper-item one><iron-icon icon='supervisor-account' style='margin-right:10px'></iron-icon></paper-item></div>");
+					<%else%>
+						$("#mensagens").append("<div class='horizontal end-justified layout' > <paper-item one> <iron-icon icon='social:person' style='margin-right:10px'></iron-icon> </paper-item><paper-item class='flex' style='margin-left:-30px'> "+$('#bug_message').val()+"</paper-item> </div>");
+					<%end%>
+					$('#bug_message').val('');
+					document.querySelector('x-spinner').active = false;
+					document.querySelector('#bug_message').disabled = false;
+				},
+				error: function(xhr, ajaxOptions, thrownError){
+					$('#toast_bug').attr('text','<%=t"bug_send_with_error"%>');
+					document.querySelector('#toast_bug').toggle();
+					console.log(xhr.statusText);
+					document.querySelector('x-spinner').active = false;
+					document.querySelector('#bug_message').disabled = false;
+				}
+			});
+		}
+	}
+</script>

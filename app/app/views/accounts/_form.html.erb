@@ -1,0 +1,224 @@
+<%=app_header_page%>
+    <%= form_for(@user) do |f| %>
+
+        <div class='row' style="margin-top:30px">
+            <div class="col s6">
+                <%=paper_input t("account_your_name"), f,"first_name",@user.first_name,"person"%>
+            </div>
+            <div class="col s6">
+                <%=paper_input t("account_last_name"), f,"last_name",@user.last_name,""%>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class="col s6">
+                <%=paper_input 'Email', f,"email",@user.email,"email"%>
+            </div>
+            <div class="col s6">
+                <%=paper_input_phone t("account_phone"),f,"phone_number",f.object.phone_number%>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class="col s6">
+                <%=paper_date_select t("account_birth"),f,f.object.born,:born,"born","cake",nil,true%>
+            </div>
+            <div class="col s6">
+                <%=paper_checkbox t("account_admin"),f,:admin,f.object.admin, "admin","supervisor_account"%>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class="col s3">
+                <%if @user.persisted?%>
+                   <%=paper_input t("user_token_access"), f,"access_token",@user.access_token,"vpn_key"%>
+                <%else%>
+                   <%=paper_input t("user_token_access"), f,"access_token",SecureRandom.hex(4),"vpn_key"%>
+                <%end%>
+            </div>
+            <div class="col s3">
+                <%=paper_input t("account_password"), f,"password",@user.password,"lock",false,"password"%>
+            </div>
+            <div class="col s3">
+                <%=paper_input t("account_password_confirmation"), f,"user_password_confirmation","","lock_outline",false,"password"%>
+            </div>
+            <div class="col s2">
+                <a class="waves-effect waves-light btn" onclick='generate_password()' style='margin-top: 25px;
+'><i class="material-icons right">vpn_key</i>Gerar senha</a>
+            </div>
+        </div>
+
+        <%  result = System::AccessTo.where("user_id"=>f.object.id)
+            @my_programs_id = []
+            result.each do |value|
+                @my_programs_id.push(value.program_id)
+            end
+        %>
+
+        <div style="display:none">
+            <input value="<% @my_programs_id.each do |value| %><%=value.to_s+","%><%  end %>" type="text" id="user_access_to" name="user[access_to]">
+        </div>
+
+    <% end %>
+<%=app_footer_page @user, '/accounts'%>
+
+<%=app_header_page 1%>
+    
+  <%= form_for @user do |f| %>
+    
+    <h3 style="margin-top: 10px;"><i class="material-icons">group</i> <%=t"account_access_group"%></h3>
+
+    <%=paper_relation_nn t("account_groups"),'system_group_access_person','users_id',@user.id, '/system/group_access_people/list/','/system/group_accesses/getSearch','/system/group_access_people/insert','/system/group_access_people/','system_group_access_id','name',"group"%>
+
+    <h3 style="margin-top: 30px;"><i class="material-icons">person_outline</i><%=t"account_allowed_programs"%></h3>
+
+    <div id='all_programs' class="collection">
+        
+        <%
+            System::CategoryProgram.all.each do |category|
+              %>
+                <a href="#!" class="collection-item"><b><%=t category.locate_label%></b></a>
+                  <%
+                    System::Program.where("category_program_id ="+category.id.to_s).order("position").each do  | program|
+                        %>
+                            
+                         <% if @my_programs_id.include? program.id%>
+                             <a href="#!" value='<%=program.id%>'  onClick="checkProgramChanged(this)" class="collection-item active"><i class="material-icons">subdirectory_arrow_right</i><%=t program.locate_label%><div class="secondary-content"><i class="material-icons"><%=program.icon%></i></div></a>
+                            <%else%>
+                              <a href="#!" value='<%=program.id%>'  onClick="checkProgramChanged(this)" class="collection-item"><i class="material-icons">subdirectory_arrow_right</i><%=t program.locate_label%><div class="secondary-content"><i class="material-icons"><%=program.icon%></i></div></a>
+                            <%end%>
+                        <%
+                    end
+            end
+          %>
+        
+    </div>
+    <div id="info" class="modal">
+        <div class="modal-content">
+            <h4>Permissões</h4>
+            <p>Você poderá adicionar permissões de acesso ao usuário de duas forma. Observe que cada uma delas permitirá ao usuário acessar pelo menu lateral se o mesmo estiver visível.</p>
+            <p><i class="material-icons">group</i><b style="font-size: 20px;">Grupos de Acesso</b></p>
+            <p>Permite ao usuário acessar todos os programas vinculados ao grupo de acesso.</p>
+            <p><i class="material-icons">person_outline</i><b style="font-size: 20px;">Acesso Individual</b></p>
+            <p>Selecione individualmente os programas que o usuário terá acesso. Veja que se o mesmo estiver presente nas permissões de grupo não é necessário selecioná-lo. Para remover basta deselecionar o mesmo.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Entendi</a>
+        </div>
+    </div>
+
+  <% end %>
+  <script>
+      
+        var programs = [<%@my_programs_id.each do |value|%><%=("\""+value.to_s+"\",").html_safe%><%end%>];
+        var input = null;
+
+        function getInput(){
+          console.log("On getInput");
+
+          if(input == null){
+            inputs = document.getElementsByTagName("input");
+            for(a=0;a < inputs.length; a++){
+                if($(inputs[a]).attr("name") == "user[access_to]"){
+                  input = inputs[a];
+                }
+            }
+          }
+          $(input).val('');
+          for(a=0;a < programs.length;a++){
+            if($(input).val() == ''){
+              $(input).val(programs[a]);
+            }else{
+              $(input).val($(input).val()+","+programs[a]);
+            }
+          }
+        }
+
+
+        function paper_relation_nn_grupos_de_acesso_callback(method,value,returned){
+          if(method != 'searched' && returned == 'success'){
+            $.ajax({
+                method:'get',
+                url: '/system/group_access_people/listProgramsByUser',
+                type: 'json',
+                data: { user_id: <%=@user.id%> },
+                success: function(data){
+                    console.log('data',data);
+                    items = document.querySelectorAll('#all_programs a')
+                    console.log('items',items.length);
+                    for(var a=0; a < data.length; a++){
+                      for(var b=0; b < items.length; b++){
+                        //console.log(checkboxs[b].value,""+data[a]['id'])
+                        if(items[b].value == ""+data[a]['id']){
+                            $(items[b]).addClass('active')
+                        }
+                      }
+                      programs.remove(""+data[a]['id']);
+                    }
+                },
+                error:function(value){
+                    var toast = document.querySelector('#toast');
+                    $(toast).attr('text', 'Erroo');
+                    toast.toggle();
+                }
+            });
+          }
+          if(method == 'deleted'){
+            location.reload()
+          }
+        }
+
+        function checkProgramChanged(value){
+
+            if(!$(value).hasClass("active")){
+              console.log("Inserindo: "+$(value).attr("value"));
+              $(value).addClass("active")
+              programs[programs.length] = $(value).attr("value");
+            }else{
+              programs.remove($(value).attr("value"));
+              $(value).removeClass("active")
+              console.log("Removendo: "+$(value).attr("value"))
+            }
+
+            getInput();
+        }
+
+        //Função de remove
+        Array.prototype.remove = function() {
+            var what, a = arguments, L = a.length, ax;
+            while (L && this.length) {
+                what = a[--L];
+                while ((ax = this.indexOf(what)) !== -1) {
+                    this.splice(ax, 1);
+                }
+            }
+            return this;
+        };
+            
+            
+        $(document).ready(function(){
+            $('ul.tabs').on('click', 'a', function(e) {
+                if(e.target.baseURI.endsWith("#tab_1")){
+                    $("#info").modal("open")
+                }
+            });
+        });
+  </script>
+    <script>
+        function generate_password(){
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for( var i=0; i < 8; i++ ){
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            $('#user_user_password_confirmation').val(text);
+            $('#user_user_password_confirmation').trigger('focus');
+            $('#user_password').val(text);
+            $('#user_password').trigger('focus');
+                
+        }
+    </script>
+<%=app_footer_page @user, '/accounts'%>
+
+<%=app_botton_save '/accounts' %>
+

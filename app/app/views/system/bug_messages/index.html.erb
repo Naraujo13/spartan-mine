@@ -1,0 +1,18 @@
+<%= app_header%>
+
+	<%=app_header_page %>
+        
+        <%=list_header @system_bug_messages, system_bug_statuses_path%>
+            
+                
+            <% @system_bug_messages.each do |system_bug_message| %>
+
+                <%=list_item system_bug_message.id, system_bug_message.message[0..40], system_bug_message.updated_at, edit_system_bug_message_path(system_bug_message), "forum"%>
+
+            <% end %>
+            
+        <%=list_footer %>
+
+	<%= app_footer_page @system_bug_messages, system_bug_messages_path%>
+<%=app_footer%>
+<%= app_botton_add new_system_bug_message_path%>

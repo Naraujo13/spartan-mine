@@ -1,0 +1,9 @@
+<%= app_header_show%>
+
+	<%= app_header_page_show notice%>
+
+		<%=paper_input_show t("bug_status_description"), @system_bug_status.description, "menu"%>
+
+	<%= app_footer_page_show system_bug_statuses_path, edit_system_bug_status_path(@system_bug_status)%>
+
+<%= app_footer_show %>

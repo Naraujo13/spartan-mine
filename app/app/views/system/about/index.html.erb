@@ -1,0 +1,96 @@
+<div style='width: 100%;margin:20px 0px;text-align:center'>
+  <img style='background-size: initial;height: 250px;' src="/assets/logo/domum.svg">
+  <h2>Sistema de Gestão de Informação</h2>
+  <h4 style='color: #a8a8a8;margin-top: -10px;'>Version <%=t "app_version"%></h4>
+</div>
+
+<div>
+  <div class="row" style="text-align: justify;">
+    <div class='col s2'>
+    </div>
+    <div class='col s8'>
+      O sistema é um software livre para o apoio de gestão de informação licenciado sobre o modelo MIT modificado que permite usar, copiar, modificar, mesclar, publicar, distribuir, sub-licenciar e/ou vender cópias deste software respeitando a licença.
+      <p style="text-align:right;">
+          <i class='material-icons' onclick="try{ga('send', 'event', 'domum', 'aboutImages')}catch(exception){};$('#about_left').modal('open')" style='margin: 0px 15px;'>loupe</i>
+      </p>
+      <div id='about_left' class='modal modal-fixed-footer'>
+          <h4>Licença MIT</h4>
+          <div>
+            <p>
+                The MIT License (MIT)
+            </p>
+            <p>
+                Copyright (c) 2015 Glauco Roberto Munsberg
+            </p>
+            <p>
+                Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+            </p>
+            <p>
+                The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+            </p>
+            <p>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+            </p>
+            <p>
+                Except as contained in this notice, the name(s) of the above copyright holders shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization.
+            </p>
+        </div>
+        <div class='modal-footer'>
+            <a href='#' class='modal-action modal-close waves-effect waves-green btn-flat'><%=t("app_understood")%></a>
+        </div>
+      </div>
+    </div>
+    <div class='col s2'>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="row" style="text-align: justify;">
+    <div class="col s2"></div>
+    <div class='col s8' style="margin:20px 20px 20px 10px">
+        <p>
+            O Domum é uma plataforma constituída sobre o Ruby on Rails, porém conta com diversas bibliotecas de terceiros que auxiliam e automatizam diversos processos dentro do sistema. Veja mais
+        </p>
+        <p style="text-align:right;">
+          <i class='material-icons' onclick="try{ga('send', 'event', 'domum', 'aboutGems')}catch(exception){};$('#about_gems').modal('open')" style='margin: 0px 15px;'>loupe</i>
+        </p>
+        <div id='about_gems' class='modal modal-fixed-footer'>
+          <h4>Licença MIT</h4>
+          <div>
+            <p>
+                Carrierwave (0.10.0)
+            </p>
+            <p>
+                Devise (3.5.1)
+            </p>
+            <p>
+                Hanna Bootstrap (0.0.5)
+            </p>
+            <p>
+                Mini Magick  (4.2.7)
+            </p>
+            <p>
+                Newrelic-rpm (3.14.2.312)
+            </p>
+            <p>
+                Polymer-rails (1.0.5)
+            </p>
+            <p>
+                Rails (4.1.6)
+            </p>
+            <p>
+                Remotipart (1.2.1)
+            </p>
+            <p>
+                Kaminari (0.16.3)
+            </p>
+            
+        </div>
+        <div class='modal-footer'>
+            <a href='#' class='modal-action modal-close waves-effect waves-green btn-flat'><%=t("app_understood")%></a>
+        </div>
+      </div>
+    </div>
+    <div class="col s2"></div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<%= app_header%>
+
+	<%=app_header_page %>
+        
+        <%=list_header @system_bugs, system_bugs_path%>
+            
+                
+            <% @system_bugs.each do |system_bug| %>
+
+                <%=list_item system_bug.id, system_bug.problem[0..40], system_bug.updated_at, edit_system_bug_path(system_program), "bug_report"%>
+
+            <% end %>
+            
+        <%=list_footer %>
+
+	<%= app_footer_page @system_bugs, system_bugs_path%>
+<%=app_footer%>
+<%= app_botton_add new_system_bug_path%>

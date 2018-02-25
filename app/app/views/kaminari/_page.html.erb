@@ -1,0 +1,12 @@
+<%# Link showing page number
+  - available local variables
+    page:          a page object for "this" page
+    url:           url to this page
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
+<span style='font-weight: 400; text-decoration: none; padding: 0px 5px;color:#757575; font-size: 18px;'class="page<%= ' current' if page.current? %>">
+    <%= link_to_unless page.current?, page, url, {:remote => remote, :rel => page.next? ? 'next' : page.prev? ? 'prev' : nil,:style=>'font-weight: 400; text-decoration: none; padding: 0px 5px; color: black; font-size: 18px;'} %>
+</span>

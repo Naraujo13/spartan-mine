@@ -1,0 +1,18 @@
+<%= app_header%>
+
+	<%=app_header_page %>
+        
+        <%=list_header @system_programs, system_programs_path%>
+            
+                
+            <% @system_programs.each do |system_program| %>
+
+                <%=list_item system_program.id, t(system_program.locate_label), system_program.updated_at, edit_system_program_path(system_program), "apps"%>
+
+            <% end %>
+            
+        <%=list_footer %>
+
+	<%= app_footer_page @system_programs, system_programs_path%>
+<%=app_footer%>
+<%= app_botton_add new_system_program_path%>

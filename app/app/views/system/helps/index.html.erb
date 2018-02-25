@@ -1,0 +1,39 @@
+<h1>Listing system_helps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Sort description</th>
+      <th>Like</th>
+      <th>Type</th>
+      <th>Post</th>
+      <th>Viewed</th>
+      <th>Link</th>
+      <th>Featured</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @system_helps.each do |system_help| %>
+      <tr>
+        <td><%= system_help.name %></td>
+        <td><%= system_help.sort_description %></td>
+        <td><%= system_help.like %></td>
+        <td><%= system_help.type %></td>
+        <td><%= system_help.post %></td>
+        <td><%= system_help.viewed %></td>
+        <td><%= system_help.link %></td>
+        <td><%= system_help.featured %></td>
+        <td><%= link_to 'Show', system_help %></td>
+        <td><%= link_to 'Edit', edit_system_help_path(system_help) %></td>
+        <td><%= link_to 'Destroy', system_help, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Help', new_system_help_path %>

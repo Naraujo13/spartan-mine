@@ -1,0 +1,19 @@
+<%= app_header%>
+
+	<%=app_header_page%>
+
+			<%=list_header @items, items_path%>
+
+
+					<% @items.each do |item| %>
+
+						<%=items_list_item item.id, item.name, item.collection_id, edit_item_path(item),"brush",true%>
+
+					<% end %>
+
+			<%=list_footer %>
+
+		<%= app_footer_page @items, items_path%>
+
+<%= app_footer%>
+<%= app_botton_add new_item_path %>

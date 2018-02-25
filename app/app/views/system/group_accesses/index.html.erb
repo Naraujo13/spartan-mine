@@ -1,0 +1,21 @@
+<%= app_header [t("group_accesses")]%>
+
+  <%=app_header_page %>
+
+        <%=list_header @example_tags, example_tags_path%>
+
+
+            <% @system_group_accesses.each do |system_group_access| %>
+
+                <%=list_item system_group_access.id,system_group_access.name,system_group_access.updated_at, edit_system_group_access_path(system_group_access),"group",true%>
+
+            <% end %>
+            
+
+        <%=list_footer %>
+      
+  <%= app_footer_page @system_group_accesses, system_group_accesses_path%>
+
+<%=app_footer%>
+
+<%= app_botton_add new_system_group_access_path%>

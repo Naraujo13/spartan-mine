@@ -1,0 +1,40 @@
+<%=app_header_page%>
+    <%= form_for(@example_tag) do |f| %>
+
+        <%=paper_input t("tag_name"), f,"title",@example_tag.title,""%>
+
+        <%=paper_checkbox t("tag_active"),f,:active,f.object.active, "active","done"%>
+
+    <% end %>
+<%=app_footer_page @example_tag, example_tags_path%>
+<%=app_botton_save example_tags_path %>
+
+<script>
+	window.addEventListener('WebComponentsReady',function(){
+		<%if cookies[:tooltip_new_tag_exemple] == nil%>
+			<%cookies[:tooltip_new_tag_exemple] = false %>
+      tooltip = Array();
+      tooltip[0] = Object();
+      tooltip[0]['title'] = '<%=t"tooltip_title_step_12"%>';
+      tooltip[0]['description'] = '<%=t"tooltip_description_12"%>';
+      tooltip[0]['element'] = 'paper-input';
+      tooltip[0]['position'] = 'top';
+      tooltip[0]['top'] = 0;
+      tooltip[0]['left'] = 0;
+      tooltip[0]['pin_top'] = 0;
+      tooltip[0]['before'] = "document.querySelector('paper-input').value = 'Nome';"
+      tooltip[1] = Object();
+      tooltip[1]['title'] = '<%=t"tooltip_title_step_13"%>';
+      tooltip[1]['description'] = '<%=t"tooltip_description_13"%>';
+      tooltip[1]['element'] = 'paper-fab';
+      tooltip[1]['position'] = 'right';
+      tooltip[1]['top'] = -20;
+      tooltip[1]['left'] = -30;
+      tooltip[1]['pin_top'] = 0;
+      document.querySelector('x-tooltip').setExecutationOnClose("document.querySelector('form').submit()");
+      document.querySelector('x-tooltip').setTooltip(tooltip);
+      document.querySelector('x-tooltip').openTooltip();
+		<%end%>
+
+	});
+</script>

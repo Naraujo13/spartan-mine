@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Names:</strong>
+  <%= @system_file.names %>
+</p>
+
+<p>
+  <strong>Origina name:</strong>
+  <%= @system_file.origina_name %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @system_file.path %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @system_file.user %>
+</p>
+
+<p>
+  <strong>Public:</strong>
+  <%= @system_file.public %>
+</p>
+
+<%= link_to 'Edit', edit_system_file_path(@system_file) %> |
+<%= link_to 'Back', system_files_path %>

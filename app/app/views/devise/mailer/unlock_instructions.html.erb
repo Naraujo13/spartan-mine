@@ -1,0 +1,7 @@
+<p><%=t"mailer_hello"%> <%= @resource.email %>!</p>
+
+<p><%=t"mailer_account_block"%></p>
+
+<p><%=t"mailer_click_on_link"%></p>
+
+<p><%= link_to t("mailer_unlock"), unlock_url(@resource, unlock_token: @token) %></p>

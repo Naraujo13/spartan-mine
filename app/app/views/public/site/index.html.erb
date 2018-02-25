@@ -1,0 +1,95 @@
+
+<div class="container">
+<div class="row">
+   <div class="col s12">
+    <h2><%=t"app_public_site_atHome"%></h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <p>O atHome é uma plataforma constituída sobre uma sólida estrutura para o desenvolvimento de aplicações web, o sistema está baseado em dois grandes frameworks para aplicações web: Ruby on Rails e o Materializecss. Concentre-se no que é importante para você, o resto o atHome está preparado para ajudá-lo a desenvolver, ele oferece uma interface Material Design, aplicações de login, acesso e helpers, seu controle o acesso das aplicações desenvolvidas para os seus usuários de forma individual ou em grupos de acesso, o atHome tem programas que permitem a você dar ou revogar direitos a acesso as aplicações.</p>
+    </div>
+</div>
+
+<div class="row">
+    <h2 class="col s12">Por que usar o atHome</h2>
+    <div class="col s12">
+			<p>
+				O atHome é sistema criado com a intenção de prover um meio simples para que as pessoas possam desenvolver aplicações Rails com excelência de interação com o usuário ao mesmo tempo que permite uma flexibilidade de criação e alto reuso de código.
+			</p>
+			<p>
+				Para atingir esse objetivo o atHome tem como base o framework Ruby on Rails o que permite criar aplicações de forma rápidas e automáticas. Em cima das aplicações básicas geradas do Rails, o atHome provê uma série de helpers e layouts que proveem aos programas uma interface baseada na experiência do Material Design e junto a isso ter funções robuscas de seleção múltiplas de registro, gestão do perfil de usuário e sistema de notificação entre outras funções.
+			</p>
+    </div>
+</div>
+
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Contas de Usuários</div>
+      <div class="collapsible-body"><span>No sistema é possível fazer a adição, modificação e remoção de usuários do através do programas Contas disponível dentro do sistema atHome. O sistema também contém uma gestão de conta que notifica ao usuário quando sua conta é modificada ou deletada do sistema.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Controle de Login</div>
+      <div class="collapsible-body"><span>Não preocupe-se com o controle de acesso ao sistema, o atHome está munido com um sofisticado controle para que você possa contruir um robusto sistema de aplicações web. Crie, modifique e remova usuários através de aplicações do sistema.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">whatshot</i>Permissões de Acesso</div>
+      <div class="collapsible-body"><span>O atHome é um sistema que permite que cada usuário tenha acesso a programas específicos ou a um conjunto de programas. Esta abordagem permite que você configure através da aplicação Permissões de forma segura quais programas o usuário pode acessar.</span></div>
+    </li>
+  </ul>
+<div class="row">
+       <div class='col s4 hide-on-med-and-down' style="padding:20px 20px 20px 10px">
+        <img  style='width:100%; height:auto' src="/assets/logo/full.png">
+    </div>
+    <div class='col s12 m8' >
+        <h2>Agilidade na Criação de Aplicações</h2>
+        <p>Utilize o comando scaffold do RoR para gerar suas aplicações  em Rails e a partir desta ação modifique as views geradas para receber o layout, funções de criação, edição e exclusão de elementos.</p>
+        <h2>Uma interface Simples e Elegante</h2>
+        <p>Ao importar o layout inside/outside você estará usando um frame para a sua aplicação conter a interface Material Design provida pela biblioteca Polymer e uma alternativa ao código html básico gerados pelo scaffold.</p>
+
+    </div>
+</div>
+<div class="row">
+    <div class='col s12 m8'>
+        <h1>Quem Usa</h1>
+        <p>Hoje o atHome é um sistema de gestão de informações com diversas finalidades. Vem sendo meio para empresas como a Indeorum criar produtos que contam com forte apelo de interface, o sistema é base de um grande projeto binacional Brasil/Argentina de saúde famíliar e ainda permite a Empresa Júnior Hut8 criar uma API para a suas aplicações mobile. </p>
+        <h1>Baixe o atHome</h1>
+        <p>Estes são alguns dos projetos de sucesso que tem como base o atHome e vêem promovendo sistemas de excelência, aproveito para Baixar, Modificar e Criar suas aplicações também usando o atHome.</p>
+            <a class="waves-effect waves-light btn" onclick="try{ga('send', 'event', 'atHome', 'homeGitInfo')}catch(exception){};location.href='https://github.com/glaucomunsberg/atHome'"><i class="material-icons right">cloud_download</i>Ir ao repositório</a> 
+    </div>
+    <div class='col s4 hide-on-med-and-down'>
+        <img  style='width:100%; height:auto' src="/assets/logo/full.png">
+    </div>
+    
+</div>
+
+</div>
+
+        <footer class="page-footer" style="padding-bottom:10px; margin-top:10px;">
+          <div class="container">
+            <div class="row hide-on-med-and-down">
+              <div class="left col l4">
+               
+                <h5 class="white-text">© DOMUM | <%=Time.now.year%> </h5>
+              </div>
+                  <div class="right-align col l8" style="padding-top:8px">
+       <a class="waves-effect waves-light btn"  onclick="location.href='/public/policy/privacy'"><i class="material-icons right">security</i><%=t'policy_privacy'%></a>    
+          <a class="waves-effect waves-light btn" onclick="location.href='/public/policy/terms'"><i class="material-icons right">gavel</i><%=t'policy_terms_of_use'%></a>   
+    </div>    
+              </div>
+              <div class="row  hide-on-large-only">
+                           <div class="center col s12 ">
+               
+                <h5 class="white-text">© DOMUM | <%=Time.now.year%> </h5>
+              </div>
+           <div class="center-align col s12">
+        <a class="waves-effect waves-light btn"  onclick="location.href='/public/policy/privacy'"><i class="material-icons right">security</i></a>    
+          <a class="waves-effect waves-light btn" onclick="location.href='/public/policy/terms'"><i class="material-icons right">gavel</i></a> 
+           </div>
+            </div>
+          </div>
+        </footer>
+
+<script>
+	try{ga('send', 'event', 'atHome', 'homeVisitation')}catch(exception){};
+</script>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @system_access_to_nested_resource.user %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @system_access_to_nested_resource.path %>
+</p>
+
+<%= link_to 'Edit', edit_system_access_to_nested_resource_path(@system_access_to_nested_resource) %> |
+<%= link_to 'Back', system_access_to_nested_resources_path %>

@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<meta http-equiv="Constent-Type" content="text/html; charset=utf-8">
+		<title>API <%=t"title_short"%> - Application Program Interface</title>
+	</head>
+	<body>
+		<h1>API <%=t"title_short"%></h1>
+		<p> <%=t("api_this_api").html_safe%></p>
+		<p> <%=t("api_this_api_example").html_safe%></p>
+		<p>	<%=t"api_back_to_home"%> <%= link_to "HomePage", root_path%></p>
+		<hr>
+		<div style="text-align: center">
+			<%= link_to t("title_short"), "https://github.com/glaucomunsberg/domum"%> - <%= Time.now.year %>
+		</div>
+	</body>
+</html>

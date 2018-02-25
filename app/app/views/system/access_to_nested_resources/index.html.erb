@@ -1,0 +1,27 @@
+<h1>Listing system_access_to_nested_resources</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Path</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @system_access_to_nested_resources.each do |system_access_to_nested_resource| %>
+      <tr>
+        <td><%= system_access_to_nested_resource.user %></td>
+        <td><%= system_access_to_nested_resource.path %></td>
+        <td><%= link_to 'Show', system_access_to_nested_resource %></td>
+        <td><%= link_to 'Edit', edit_system_access_to_nested_resource_path(system_access_to_nested_resource) %></td>
+        <td><%= link_to 'Destroy', system_access_to_nested_resource, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Access to nested resource', new_system_access_to_nested_resource_path %>

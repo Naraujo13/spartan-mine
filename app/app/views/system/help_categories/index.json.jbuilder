@@ -1,0 +1,1 @@
+json.array! @system_help_categories, partial: 'system_help_categories/system_help_category', as: :system_help_category

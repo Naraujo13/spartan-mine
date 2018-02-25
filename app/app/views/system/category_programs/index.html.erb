@@ -1,0 +1,18 @@
+<%= app_header%>
+
+	<%=app_header_page %>
+        
+        <%=list_header @category_programs, system_category_programs_path%>
+            
+                
+            <% @category_programs.each do |category_program| %>
+
+                <%=list_item category_program.id, t(category_program.locate_label), category_program.updated_at, edit_system_category_program_path(category_program), "menu"%>
+
+            <% end %>
+            
+        <%=list_footer %>
+
+	<%= app_footer_page @category_programs, system_category_programs_path%>
+<%=app_footer%>
+<%= app_botton_add new_system_category_program_path%>

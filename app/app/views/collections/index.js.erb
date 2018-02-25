@@ -1,0 +1,11 @@
+<%= @page_index = params[:tab]%>
+
+$('#collection_<%=params[:tab]%>').html('')
+
+  <% @collections.each do | collection | %>
+
+     $('#collection_<%=params[:tab]%>').append(`<%=collection_list_item collection.id, collection.name, collection.museum_id, edit_collection_path(collection),"palette",true%>`);
+
+     <% end %>
+
+$('#paginator_<%=params[:tab]%>').html('<%=escape_javascript(paginate(@collections, :remote => true).to_s) %>');

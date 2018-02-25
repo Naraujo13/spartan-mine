@@ -1,0 +1,44 @@
+<%=app_header_page%>
+    <%= form_for(@example_post) do |f| %>
+
+       
+       <div class="row">
+        <div class="col s12">
+            
+        <%=paper_input t("post_title"), f,"title",@example_post.title,"assignment"%>
+
+        </div>
+        
+        <div class="col s12">
+            
+        <%=paper_input t("post_description"), f,"description",@example_post.description,"format_quote"%>
+
+        </div> 
+        <div class="col s12">
+            
+        <%=paper_editor t("post_content"), f,"content",@example_post.content,"mode_comment"%>
+
+        </div>  
+        
+            
+        <% if @example_post.persisted?%>
+            <%=paper_relation_nn t("tag_tags"),'example_post_tag','example_posts_id',@example_post.id, '/example/post_tags/list/','/example/tags/getSearch','/example/post_tags/insert','/example/post_tags/','example_tags_id','title'%>
+        <%end%>
+
+        
+        
+            <div class="col s12">
+                <% paper_chooser_file t("post_image"),f,"url_image","/data/"+@example_post.url_image.to_s,System::File.all%>
+            </div>
+            <div class="col s12">
+                <%=paper_select t("post_category"),f,f.object.example_category_id,"example_category_id",:example_category_id,Example::Category.all,"id","description","turned_in"%>
+                <%=paper_date_select t("post_publish_at"),f,f.object.publish_at,:publish_at,"publish_at","today",nil,false%>
+                <%=paper_input t("post_likes"), f,"plus_one",@example_post.plus_one,"thumb_up",false,"number"%>
+                <%=paper_checkbox t("post_public"), f, :public, f.object.public, "public","done"%>
+            </div>
+       </div>
+
+    <% end %>
+<%=app_footer_page @example_post, example_posts_path%>
+<%=app_botton_save example_posts_path %>
+

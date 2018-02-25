@@ -1,0 +1,11 @@
+<%%= @page_index = params[:tab]%>
+
+$('#collection_<%%=params[:tab]%>').html('')
+
+  <%% @<%= plural_table_name %>.each do | <%= singular_table_name %> | %>
+
+     $('#collection_<%%=params[:tab]%>').append(`<%%=list_item <%= singular_table_name %>.id, <%= singular_table_name %>.<%=attributes[0].name%>,<%= singular_table_name %>.updated_at, edit_<%= singular_table_name %>_path(<%= singular_table_name %>),"chat",true%>`);
+
+     <%% end %>
+
+$('#paginator_<%%=params[:tab]%>').html('<%%=escape_javascript(paginate(@<%= plural_table_name%>, :remote => true).to_s) %>');

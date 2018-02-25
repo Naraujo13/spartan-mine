@@ -1,0 +1,17 @@
+<%=app_header_page%>
+
+  <%= form_for(@collection) do |f| %>
+
+                          <%=paper_input :collection_idD, f,"collection_idD", @collection.collection_idD,"",true%>
+
+      
+                                        <%=paper_input :Museum, f,"Museum", @collection.Museum,"",true%>
+
+      
+                                        <%=paper_input :name, f,"name", @collection.name,"",true%>
+
+      
+                    <% end %>
+
+<%=app_footer_page @collection,collections_path%>
+<%=app_botton_save collections_path %>
