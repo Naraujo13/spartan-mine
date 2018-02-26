@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "collections", ["museum_id"], name: "fk_rails_81998d25f1", using: :btree
+  add_index "collections", ["museum_id"], name: "fk_rails_55765cf060", using: :btree
 
   create_table "example_categories", force: :cascade do |t|
     t.text     "description", limit: 65535
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "items", ["collection_id"], name: "fk_rails_e2d6b86404", using: :btree
+  add_index "items", ["collection_id"], name: "fk_rails_b4ef268a4c", using: :btree
 
   create_table "mediafiles", force: :cascade do |t|
     t.integer  "item_id",    limit: 4
@@ -91,8 +91,7 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",             null: false
   end
 
-  add_index "mediafiles", ["item_id"], name: "fk_rails_1eef1df3ea", using: :btree
-  add_index "mediafiles", ["user_id"], name: "fk_rails_018474c297", using: :btree
+  add_index "mediafiles", ["item_id"], name: "fk_rails_3b7f889b6e", using: :btree
 
   create_table "museums", force: :cascade do |t|
     t.string   "cod_museum",    limit: 255
@@ -107,8 +106,8 @@ ActiveRecord::Schema.define(version: 20180225021839) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "museums", ["director_id"], name: "fk_rails_c6c99a4939", using: :btree
-  add_index "museums", ["technician_id"], name: "fk_rails_0271032943", using: :btree
+  add_index "museums", ["director_id"], name: "fk_rails_1c92f580a4", using: :btree
+  add_index "museums", ["technician_id"], name: "fk_rails_806844e742", using: :btree
 
   create_table "system_access_to_nested_resources", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
