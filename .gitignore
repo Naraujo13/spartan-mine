@@ -70,3 +70,5 @@ app/uploads/
 ubuntu-xenial-16\.04-cloudimg-console\.log
 
 *.ai
+
+app/public/data/

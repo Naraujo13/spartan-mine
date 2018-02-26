@@ -912,7 +912,8 @@ module PaperHelper
     #
     # - label:: 					String 			com a label
     # - icon::						String 			opcional com o icone
-    def paper_download_file label, path_file,icon="file_download",
+    def paper_download_file label, path_file,icon="file_download"
+        path_file = path_file.gsub("public/", "")
         retorno = "<div class='row'>
                     <a href='#{path_file}' download class='waves-effect waves-light btn'><i class='material-icons right'>#{icon}</i> #{label}</a>
                 </div>"
