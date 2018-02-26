@@ -1,6 +1,6 @@
 
 # Program Categories
-System::CategoryProgram.create(:id=>6, :locate_label => "Gerenciar" ,:icon=>"apps")
+System::CategoryProgram.create(:id=>6, :locate_label => "Gerenciar" ,:icon=>"build")
 
 # Programs
 program_museum = System::Program.create(:locate_label=> "Museus", :description=>"", :path=>"/museums", :icon=>"apps", :category_program_id=>6, :visible=>true, :position => 6)

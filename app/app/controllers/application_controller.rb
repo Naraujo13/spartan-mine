@@ -29,40 +29,4 @@ class ApplicationController < ActionController::Base
 	  @report = JasperReport.new(p_name, p_report_url, p_params, p_report_type)
 	  return @report.get_report
 	end
-
-
-	# -------------- JSON API -------------- #
-
-	# All Database
-	def all_json
-		users_json
-		museums_json
-		collections_json
-		items_json
-	end
-
-	# All Users
-	def users_json
-		data = User.all.to_json
-		send_data data, :type => 'application/json; header=present', :disposition => "attachment; filename=users.json"
-	end
-
-	# All Museums
-	def museums_json
-		data = Museum.all.to_json
-		send_data data, :type => 'application/json; header=present', :disposition => "attachment; filename=museums.json"
-	end
-
-	# All Collections
-	def collections_json
-		data = Collection.all.to_json
-		send_data data, :type => 'application/json; header=present', :disposition => "attachment; filename=collections.json"
-	end
-
-	# All Items
-	def items_json
-		data = Item.all.to_json
-		send_data data, :type => 'application/json; header=present', :disposition => "attachment; filename=items.json"
-	end
-	
 end

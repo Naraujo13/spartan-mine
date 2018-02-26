@@ -9,7 +9,8 @@ System::CategoryProgram.create(:id=>1, :locate_label => "menu_category_applicati
 System::CategoryProgram.create(:id=>2, :locate_label => "menu_category_configuration" ,:icon=>"settings")
 System::CategoryProgram.create(:id=>3, :locate_label => "menu_category_permissions" ,:icon=>"security")
 System::CategoryProgram.create(:id=>4, :locate_label => "menu_category_examples" ,:icon=>"code")
-System::CategoryProgram.create(:id=>5, :locate_label => "menu_category_help" ,:icon=>"build")
+System::CategoryProgram.create(:id=>5, :locate_label => "menu_category_help" ,:icon=>"help_outline")
+System::CategoryProgram.create(:id=>100, :locate_label => "Exportar" ,:icon=>"import_export")
 
 # Programas - Aplicação
 System::Program.create(:id=>1,:locate_label=> "menu_program_profile" ,:description=>"", :path=>"/users/edit", :icon=>"account_circle", :category_program_id=>1, :visible=>true, :position => 3)
@@ -35,9 +36,19 @@ System::Program.create(:id=>13,:locate_label=> "menu_program_group_access_person
 System::Program.create(:id=>19,:locate_label=> "menu_program_bug_report", :description=>"", :path=>"/system/bugs", :icon=>"code", :category_program_id=>5,:visible=>true, :position => 3)
 System::Program.create(:id=>20,:locate_label=> "menu_program_about" , :description=>"", :path=>"/system/about", :icon=>"info_outline", :category_program_id=>5, :visible=>true, :position => 4)
 
+# Export
+System::Program.create(:id=>100,:locate_label=> "Usuários", :description=>"", :path=>"/export_json/users", :icon=>"person", :category_program_id=>100,:visible=>true, :position => 1)
+System::Program.create(:id=>101,:locate_label=> "Museus", :description=>"", :path=>"/export_json/museums", :icon=>"account_balance", :category_program_id=>100,:visible=>true, :position => 1)
+System::Program.create(:id=>102,:locate_label=> "Coleções", :description=>"", :path=>"/export_json/collections", :icon=>"palette", :category_program_id=>100,:visible=>true, :position => 1)
+System::Program.create(:id=>103,:locate_label=> "Obras", :description=>"", :path=>"/export_json/items", :icon=>"brush", :category_program_id=>100,:visible=>true, :position => 1)
+
+
+
 # Groups of Access
 System::GroupAccess.create(:id=>1, :name=> I18n.t("access_group_manangers"), :description=>"Acesso para os Gerentes do Sistema",:active=>true)
 System::GroupAccess.create(:id=>2, :name=> I18n.t("access_group_users"), :description=>"Acesso para os Usuários do Sistema",:active=>true)
+
+
 
 # Programs at Groups of Access
     #Admin
@@ -52,6 +63,10 @@ System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs
 System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>12)
 System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>13)
 System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>22)
+System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>100)
+System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>101)
+System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>102)
+System::GroupAccessProgram.create(:system_group_accesses_id=>1, :system_programs_id=>103)
     #User
 System::GroupAccessProgram.create(:system_group_accesses_id=>2, :system_programs_id=>1)
 System::GroupAccessProgram.create(:system_group_accesses_id=>2, :system_programs_id=>8)

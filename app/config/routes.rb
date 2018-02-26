@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'export_json/users'
+
+  get 'export_json/museums'
+
+  get 'export_json/collections'
+
+  get 'export_json/items'
+
   resources :mediafiles
 
   resources :items
@@ -87,7 +95,7 @@ Rails.application.routes.draw do
         end
     end
   end
-    
+
   resources :accounts, :as => "users" do
     collection do
       get 'become'
