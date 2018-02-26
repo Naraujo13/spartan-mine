@@ -43,8 +43,14 @@
             
                     
             <% @attached_mediafiles.each do |mf| %>
-                  <%= paper_download_file mf.file_identifier, mf.file_url %>
-                  <%= link_to "<i class='material-icons'>delete</i>".html_safe, {:action => :destroy, :controller => 'mediafiles', :id => mf.id}, :method => :delete %>
+                  <div class='row'>
+                        <div class='col s11'>
+                              <%= paper_download_file mf.file_identifier, mf.file_url %>
+                        </div>
+                        <div class='col s1'>
+                              <%= delete_button mf.id, "mediafiles" %>
+                        </div>
+                  </div>
             <% end %>
 
       <% end %>
