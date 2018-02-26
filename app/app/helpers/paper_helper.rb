@@ -920,6 +920,20 @@ module PaperHelper
         retorno.html_safe
     end
 
+    def delete_button register_id, controller
+
+        retorno = "
+            <i class='material-icons' rel='nofollow' data-method='delete' href='/#{controller}/#{register_id}'>
+                delete
+            </i>"
+
+
+        # retorno = link_to "<i class='material-icons'>delete</i>", {:action => :destroy, :controller => controller, :id => register_id}, :method => :delete, :confirm => "Are you sure?"
+        
+        retorno.html_safe
+    
+    end
+
     # Constroi um editor de texto para o
     # 	o sistema atHome
     # === Parametros

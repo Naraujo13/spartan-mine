@@ -46,6 +46,9 @@ class MediafilesController < ApplicationController
 
   # DELETE /mediafiles/1
   def destroy
+
+    puts "\n\n\n\nDESTROY MEDIAFILES\n\n\n\n"
+
     @mediafiles = Mediafile.find(params[:id])
     @mediafile.destroy
     redirect_to(:back)

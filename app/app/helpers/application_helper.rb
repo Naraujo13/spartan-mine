@@ -587,11 +587,6 @@ module ApplicationHelper
         retorno.html_safe
     end
 
-    def delete_button register_id
-        retorno  = "<i class='material-icons' to_delete_id='#{register_id}' onClick=\"dialog_confirmation_#{@page_index}('#{register_id}')\" style='color: black;cursor:pointer'>delete</i>"        
-        retorno.html_safe
-    end
-
     def gallery_header index=0
         index = index.to_s
         retorno = """
